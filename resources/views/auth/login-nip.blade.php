@@ -3,13 +3,19 @@
 @section('title', 'Login')
 
 @section('content')
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <form method="post" action="{{ route('nip') }}"
+        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        @csrf
         <div>
             <a href="/">
                 <img src="{{ asset('assets/img/logo/hanover-primary.svg') }}" alt="Hanover Logo" class="w-60">
             </a>
         </div>
-
+        @error('nip')
+            <div class="text-red-500 mt-2 text-sm">
+                {{ $message }}
+            </div>
+        @enderror
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <!-- Session Status -->
 
@@ -35,5 +41,5 @@
                 </div>
             </form>
         </div>
-    </div>
+    </form>
 @endsection
