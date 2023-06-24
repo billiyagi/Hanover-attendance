@@ -8,7 +8,7 @@
 
             <div class="stat">
                 <div class="stat-figure text-info">
-                    <img src="http://billiyagi.local/assets/img/icon/blog.png" alt="Blog Icon" class="w-16 h-16">
+                    <i class="fa-solid fa-blog text-4xl"></i>
                 </div>
                 <div class="font-bold">Blog Posts</div>
                 <div class="stat-value my-3">24</div>
@@ -20,7 +20,7 @@
 
             <div class="stat">
                 <div class="stat-figure text-violet-100">
-                    <img src="http://billiyagi.local/assets/img/icon/code.png" alt="Blog Icon" class="w-16 h-16">
+                    <i class="fa-solid fa-code text-4xl"></i>
                 </div>
                 <div class="font-bold">Projects</div>
                 <div class="stat-value my-3">7</div>
@@ -32,7 +32,7 @@
 
             <div class="stat">
                 <div class="stat-figure text-primary">
-                    <img src="http://billiyagi.local/assets/img/icon/views.png" alt="Blog Icon" class="w-16 h-16">
+                    <i class="fa-solid fa-folder-open text-4xl"></i>
                 </div>
                 <div class="font-bold">Total Page Views</div>
                 <div class="stat-value my-3">89,400</div>

@@ -41,6 +41,10 @@
             </label>
             <div tabindex="0"
                 class="dropdown-content card card-compact w-64 p-2 shadow bg-base-200 text-primary-content z-10">
+                <div class="p-4">
+                    <span class="block">{{ Auth::user()->name }}</span>
+                    <small class="text-ghost">{{ '@' . Auth::user()->username }}</small>
+                </div>
                 <ul class="menu rounded-box">
                     <li class="mb-2">
                         <a>

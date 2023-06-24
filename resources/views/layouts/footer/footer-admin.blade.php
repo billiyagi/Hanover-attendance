@@ -78,5 +78,6 @@
     });
 </script>
 <footer class="md-0 md:ms-60 bg-base-200 px-10 py-5">
-    <span>&copy; {{ date('Y') }} Billy System by <a href="https://github.com/billiyagi">Febry Billiyagi</a></span>
+    <span>&copy; {{ date('Y') }} Hanover Attendance by <a href="https://github.com/billiyagi">Hannover
+            Inc.</a></span>
 </footer>

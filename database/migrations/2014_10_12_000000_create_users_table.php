@@ -14,9 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username')->unique();
+            $table->char('nip', 10)->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+
+            // Passsowrd akan menjadi PIN ketika akun tersebut berjenis 'employee'
             $table->string('password');
+            $table->string('avatar');
             $table->rememberToken();
             $table->timestamps();
         });

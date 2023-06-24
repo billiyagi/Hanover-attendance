@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Hanover Dashboard :: @yield('title')</title>
+    @notifyCss
+    <title>Hanover :: @yield('title')</title>
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
 <body>
-
     {{-- Aside --}}
     <aside class="bg-base-200 h-full w-60 fixed left-0 top-0 hidden md:block">
         <div class="w-full relative">
@@ -41,7 +41,7 @@
             <div class="modal-action">
                 <!-- if there is a button in form, it will close the modal -->
                 <button class="btn">Close</button>
-                <a href="" class="btn bg-red-600 text-white hover:bg-red-800">Sign Out</a>
+                <a href="{{ route('logout') }}" class="btn bg-red-600 text-white hover:bg-red-800">Sign Out</a>
             </div>
         </form>
     </dialog>
@@ -50,84 +50,8 @@
 
     {{-- Script --}}
     @yield('script')
-
-    {{-- <script>
-        let ligthButton = document.getElementById('ligthButton');
-        let darkButton = document.getElementById('DarkButton');
-
-        // Automate theme
-        if (localStorage.getItem('theme') == 'dark') {
-            // Dark
-            document.querySelector('html').setAttribute('data-theme', 'dark');
-
-            document.querySelector('#hanoverLogoLight') forEach((logoLight) => {
-                logoLight.style.display = 'block';
-            });
-            document.querySelector('#hanoverLogoDark') forEach((logoLight) => {
-                logoLight.style.display = 'dark';
-            });
-
-
-            document.querySelector('body').classList.remove('bg-gray-200');
-            document.querySelectorAll('.bg-white').forEach((result) => {
-                result.classList.replace('bg-white', 'bg-white');
-            })
-
-        } else if (localStorage.getItem('theme') == 'light') {
-            // Light
-            document.querySelector('html').setAttribute('data-theme', 'light');
-
-            document.querySelector('#modeChecked').setAttribute('checked', true);
-
-            document.querySelector('#hanoverLogoLight') forEach((logoLight) => {
-                logoLight.style.display = 'none';
-            });
-            document.querySelector('#hanoverLogoDark') forEach((logoLight) => {
-                logoLight.style.display = 'block';
-            });
-
-            document.querySelector('body').classList.add('bg-gray-200');
-            document.querySelectorAll('.bg-base-300').forEach((result) => {
-                result.classList.replace('bg-base-300', 'bg-white');
-            })
-
-
-
-        } else {
-            let theme = 'light';
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                theme = 'dark';
-            }
-            document.querySelector('html').setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        }
-
-        // Button To Light
-        ligthButton.addEventListener('click', function() {
-            document.querySelector('html').setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            document.querySelector('#hanoverLogoLight').style.display = 'none';
-            document.querySelector('#hanoverLogoDark').style.display = 'block';
-
-            document.querySelector('body').classList.add('bg-gray-200');
-            document.querySelectorAll('.bg-base-300').forEach((result) => {
-                result.classList.replace('bg-base-300', 'bg-white');
-            })
-        });
-
-        // Button To Dark
-        darkButton.addEventListener('click', function() {
-            document.querySelector('html').setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            document.querySelector('#hanoverLogoLight').style.display = 'block';
-            document.querySelector('#hanoverLogoDark').style.display = 'none';
-
-            document.querySelector('body').classList.remove('bg-gray-200');
-            document.querySelectorAll('.bg-white').forEach((result) => {
-                result.classList.replace('bg-white', 'bg-base-300');
-            })
-        });
-    </script> --}}
+    <x-notify::notify />
+    @notifyJs
 </body>
 
 </html>
