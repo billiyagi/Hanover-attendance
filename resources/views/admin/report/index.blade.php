@@ -1,7 +1,5 @@
 @extends('layouts.main.admin')
 
-@section('title', 'Dashboard')
-
 @section('content')
 
 <div class="card w-full p-6 mt-2 bg-base-300 my-8">

@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
 
             //Report
-            //Route::get('/report', [ReportController::class, 'index']);
+            Route::get('/report', [ReportController::class, 'index']);
         });
     });
 
@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/dashboard', [MemberDashboardController::class, 'index']);
 
             //Report
-            Route::get('/report', [MemberReportController::class, 'index']);
+            //Route::get('/report', [MemberReportController::class, 'index']);
         });
     });
 });

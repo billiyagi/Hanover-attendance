@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('report', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamp('range_start');
-            $table->timestamp('range_end');
-            $table->unsignedBigInteger('data_id');
-            $table->timestamps();
-           
+        Schema::table('report', function (Blueprint $table) {
+            $table->unsignedBigInteger('attendance_id');
+        
+            $table->foreign('attendance_id')->references('id')->on('attendance');
         });
+
     }
 
     /**
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('report_attendance');
     }
 };

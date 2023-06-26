@@ -13,5 +13,6 @@ class ReportSeeder extends Seeder
     public function run(): void
     {
         //
+        
     }
 }
