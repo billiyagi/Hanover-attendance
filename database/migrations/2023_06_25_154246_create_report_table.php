@@ -18,7 +18,6 @@ return new class extends Migration
             $table->timestamp('range_start');
             $table->timestamp('range_end');
             $table->timestamps();
-           
         });
     }
 
