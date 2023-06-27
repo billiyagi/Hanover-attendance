@@ -18,8 +18,9 @@ class AttendanceFactory extends Factory
     {
         return [
             'present_in' => $this->faker->dateTimeBetween('-1 week', 'now'),
+            'image_in' => $this->faker->imageUrl(),
             'present_out' => $this->faker->dateTimeBetween('-1 week', 'now'),
-            'image' => 'https://picsum.photos/200/300',
+            'image_out' => $this->faker->imageUrl(),
             'user_id' => 1
         ];
     }
