@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('report', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamp('range_start');
-            $table->timestamp('range_end');
+            $table->timestamp('range_start')->nullable();
+            $table->timestamp('range_end')->nullable();
             $table->timestamps();
         });
     }
