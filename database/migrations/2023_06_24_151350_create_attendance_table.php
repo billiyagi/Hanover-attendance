@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('attendance', function (Blueprint $table) {
             $table->id();
             $table->timestamp('present_in')->nullable();
+            $table->string('image_in')->nullable();
             $table->timestamp('present_out')->nullable();
-            $table->string('image');
+            $table->string('image_out')->nullable();
             $table->timestamps();
         });
     }
