@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Data\DataController ;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
@@ -35,16 +36,27 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+<<<<<<< Updated upstream
 
             //Report
             Route::get('/report', [ReportController::class, 'index']);
+=======
+            Route::get('/data', [DataController::class, 'index']);
+
+            // Create
+            Route::get('/createData', [DataController::class, 'create']);
+            Route::get('/createDataUser/{dataId}', [DataController::class, 'createDataUser'])->name('createDataUser');
+
+            // Store
+            Route::post('/storeData', [DataController::class, 'store']);
+
+
+>>>>>>> Stashed changes
         });
     });
 
-    // Member area
-    Route::middleware(['member'])->group(function () {
-        Route::prefix('member')->group(function () {
 
+<<<<<<< Updated upstream
             // Dashboard
             Route::get('/dashboard', [MemberDashboardController::class, 'index']);
 
@@ -52,4 +64,6 @@ Route::middleware(['auth'])->group(function () {
             //Route::get('/report', [MemberReportController::class, 'index']);
         });
     });
+=======
+>>>>>>> Stashed changes
 });

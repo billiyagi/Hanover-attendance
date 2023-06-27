@@ -14,4 +14,5 @@ class Roles extends Model
     ];
     protected $table = 'roles';
     public $timestamps = false;
+
 }

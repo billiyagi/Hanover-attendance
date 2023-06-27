@@ -36,7 +36,7 @@
                     Data
                 </summary>
                 <ul class="mt-3">
-                    <li><a href="">Buat Data</a></li>
+                    <li><a href="{{url('/admin/createData')}}">Buat Data</a></li>
                     <li><a href="">Pegawai</a></li>
                 </ul>
             </details>

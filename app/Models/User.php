@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -38,4 +39,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    use HasFactory;
+    //panggil tabel
+    protected $table = 'users';
+    // matikan timestamps
+    public $timestamps = false;
+    //kolom yang bisa diisi
+    protected $fillable = [
+
+    'name',
+    'username',
+    'nip',
+    'email_verified_at',
+    'password',
+    'avatar',
+    'remember_token',
+    'created_at',
+    'edit_at',
+    'role_id',
+    
+    ];
+
+    
 }
