@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->timestamp('range_start');
             $table->timestamp('range_end');
-            $table->unsignedBigInteger('data_id');
             $table->timestamps();
            
         });
