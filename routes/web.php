@@ -35,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+
+            //Report
+            Route::get('/report', [ReportController::class, 'index']);
         });
     });
 
@@ -44,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/dashboard', [MemberDashboardController::class, 'index']);
+
+            //Report
+            //Route::get('/report', [MemberReportController::class, 'index']);
         });
     });
 });
