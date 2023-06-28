@@ -20,8 +20,8 @@
                     Absensi
                 </summary>
                 <ul class="mt-3">
-                    <li><a href="">Data Absensi</a></li>
-                    <li><a>Buat Absensi</a></li>
+                    <li><a href="{{ url('/admin/attendance') }}">Data Absensi</a></li>
+                    <li><a href="{{ url('/admin/attendance/create') }}">Buat Absensi</a></li>
                 </ul>
             </details>
         </li>

@@ -15,9 +15,13 @@ class Data extends Model
     //kolom yang bisa diisi
     protected $fillable = [
 
-    'name'
+        'name'
 
     ];
 
 
+    public function attendance()
+    {
+        return $this->belongsTo(Attendance::class, 'id', 'data_id');
+    }
 }
