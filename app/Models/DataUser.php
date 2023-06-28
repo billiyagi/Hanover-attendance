@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -17,14 +18,12 @@ class DataUser extends Model
     //kolom yang bisa diisi
     protected $fillable = [
 
-    'name',
-    'created_at',
-    'updated_at',
-    'data_id',
-    'user_id'
+        'name',
+        'created_at',
+        'updated_at',
+        'data_id',
+        'user_id'
 
-    
+
     ];
-
-
 }
