@@ -11,10 +11,19 @@ class Attendance extends Model
 
     protected $table = 'attendance';
 
-    protected $fillable = [
-        'present_in',
-        'present_out',
-        'image',
-        'user_id'
-    ];
+    protected $guarded = ['id', 'creatd_at', 'updated_at'];
+
+    protected $softDelete = false;
+
+    // Membuat relasi one to many ke tabel data
+    public function data()
+    {
+        return $this->hasMany(Data::class, 'id', 'data_id');
+    }
+
+    // Membuat relasi one to many ke tabel attendance_user
+    public function attendanceUser()
+    {
+        return $this->hasMany(AttendanceUser::class, 'attendance_user_id', 'id');
+    }
 }

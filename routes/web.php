@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
@@ -35,6 +36,15 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+
+            // Attendance
+            Route::get('/attendance', [AttendanceController::class, 'index']);
+            // Route::get('/attendance/search', [AttendanceController::class, 'index']);
+            Route::get('/attendance/create', [AttendanceController::class, 'create']);
+            Route::post('/attendance/store', [AttendanceController::class, 'store']);
+            Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit']);
+            Route::put('/attendance/{id}/update', [AttendanceController::class, 'update']);
+            Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
 
             //Report
             Route::get('/report', [ReportController::class, 'index']);
