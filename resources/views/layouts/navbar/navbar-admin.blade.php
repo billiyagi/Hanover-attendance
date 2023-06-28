@@ -11,7 +11,7 @@
             </svg>
         </label>
         <div class="block">
-            <h1 class="text-xl md:text-3xl font-bold text-light">System Dashboard</h1>
+            <h1 class="text-xl md:text-3xl font-bold text-light">@yield('title')</h1>
         </div>
     </div>
 

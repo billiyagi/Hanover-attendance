@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('report', function (Blueprint $table) {
-            $table->unsignedBigInteger('attendance_id');
+        Schema::table('attendance_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('attendance_user_id');
 
-            $table->foreign('attendance_id')->references('id')->on('attendance_user');
+            $table->foreign('attendance_user_id')->references('id')->on('attendance');
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('report_attendance');
+        Schema::dropIfExists('attendance_relation_attendance_user');
     }
 };
