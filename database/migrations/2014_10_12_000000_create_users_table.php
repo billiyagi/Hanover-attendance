@@ -18,6 +18,7 @@ return new class extends Migration
             $table->char('nip', 10)->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->enum('role', ['admin', 'member']); // Kolom role untuk menentukan peran pengguna
 
             // Passsowrd akan menjadi PIN ketika akun tersebut berjenis 'employee'
             $table->string('password');

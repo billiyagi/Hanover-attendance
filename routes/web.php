@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit']);
             Route::put('/attendance/{id}/update', [AttendanceController::class, 'update']);
             Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
+            //user
+            Route::get('/users/create', 'UserController@create')->name('users.create');
+
 
             //Report
             Route::get('/report', [ReportController::class, 'index']);
