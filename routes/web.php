@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
@@ -47,7 +48,15 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
 
             //Report
+            // Route::get('/report', [ReportController::class, 'index']);
             Route::get('/report', [ReportController::class, 'index']);
+            Route::get('/report/create', [ReportController::class, 'create']);
+            Route::post('/report/store', [ReportController::class, 'store']);
+            Route::get('/report/{id}/edit', [ReportController::class, 'edit']);
+            Route::put('/report/{id}/update', [ReportController::class, 'update']);
+            Route::delete('/report/{id}/delete', [ReportController::class, 'destroy']);
+
+            
         });
     });
 

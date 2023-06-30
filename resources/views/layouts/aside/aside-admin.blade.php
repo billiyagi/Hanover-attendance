@@ -48,8 +48,8 @@
                     Laporan
                 </summary>
                 <ul class="mt-3">
-                    <li><a href="">Data Laporan</a></li>
-                    <li><a>Buat Laporan</a></li>
+                    <li><a href="{{ url('/admin/report') }}">Data Laporan</a></li>
+                    <li><a href="{{ url('/admin/report/create')}}">Buat Laporan</a></li>
                 </ul>
             </details>
         </li>
