@@ -77,7 +77,38 @@
         })
     });
 </script>
+
+@error('name')
+<script>
+document.getElementById('dataBtn').click()
+</script>
+@enderror
+
+
 <footer class="md-0 md:ms-60 bg-base-200 px-10 py-5">
     <span>&copy; {{ date('Y') }} Hanover Attendance by <a href="https://github.com/billiyagi">Hannover
             Inc.</a></span>
 </footer>
+
+
+<dialog id="create_data" class="modal modal-bottom sm:modal-middle" >
+  <form class="modal-box" action="{{url('admin/data/store')}}" method="POST" enctype="multypart/form-data">
+    <h3 class="font-bold text-lg pb-4">Data</h3>
+     @csrf      
+        <div class="">
+                <div class="form-control w-full undefined">
+                    <label class="label">
+                        <span class="label-text text-base-content undefined">Nama Data</span>
+                    </label>
+                    <input type="text" class="input  input-bordered w-full " name="name"  value="{{ old('name') }}">
+                    @error('name')
+                    <label class="label">
+                        <span class="label-text-alt text-red-600">{{$message }}</span>
+                    </label>
+                @enderror
+                </div>
+            <div class="mt-16"><button class="btn btn-primary float-right" type="submit" id="dataBtn">Tambah</button></div>
+  </form>
+</dialog>
+
+

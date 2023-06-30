@@ -61,5 +61,10 @@ class User extends Authenticatable
     
     ];
 
+    // Membuat relasi one to many ke tabel roles
+    public function roles()
+    {
+        return $this->hasMany(Roles::class, 'id', 'data_id');
+    }
     
 }

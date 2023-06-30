@@ -1,16 +1,18 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-
-use App\Http\Controllers\Data\DataController ;
-
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\DataController;
+use App\Http\Controllers\Admin\DataUserController;
+
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,17 +56,23 @@ Route::middleware(['auth'])->group(function () {
             //Report
             Route::get('/report', [ReportController::class, 'index']);
 
+
+
+            // Data User
+            Route::get('/dataUser/{dataId}/create', [DataUserController::class, 'create'])->name('createDataUser');
+            Route::post('/dataUser/store', [DataUserController::class, 'store']);
+            Route::get('/dataUser/{id}', [DataUserController::class, 'index']);
+            Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);
+            Route::put('/dataUser/{id}/update', [DataUserController::class, 'update']);
+
+            // Data
             Route::get('/data', [DataController::class, 'index']);
-
-            // Create
-            Route::get('/createData', [DataController::class, 'create']);
-            Route::get('/createDataUser/{dataId}', [DataController::class, 'createDataUser'])->name('createDataUser');
-
-            // Store
-            Route::post('/storeData', [DataController::class, 'store']);
-
-
-
+            Route::get('/data/create', [DataController::class, 'create']);
+            Route::post('/data/store', [DataController::class, 'store']);
+            Route::get('/data', [DataController::class, 'index']);
+            Route::delete('/data/{id}/delete', [DataController::class, 'destroy']);
+            Route::get('/data/{id}/edit', [DataController::class, 'edit']);
+            Route::put('/data/{id}/update', [DataController::class, 'update']);
         });
     });
 

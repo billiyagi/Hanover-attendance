@@ -17,7 +17,7 @@ class Admin
     {
         // Redirect if user is not adminw
         if (auth()->user()->role_id == 2) {
-            return redirect()->route('member-dashboard');
+            // return redirect()->route('member-dashboard');
         }
 
         return $next($request);

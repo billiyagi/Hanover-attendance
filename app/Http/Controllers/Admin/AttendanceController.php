@@ -52,7 +52,7 @@ class AttendanceController extends Controller
     }
 
 
-    public function edit(string $id,)
+    public function edit(string $id)
     {
         $datas = Data::all();
         $attendance = Attendance::findOrFail($id);
