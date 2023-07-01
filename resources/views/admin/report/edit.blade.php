@@ -12,9 +12,9 @@
             {{-- Nama --}}
             <div class="form-control w-full undefined mb-3">
                 <label class="label">
-                    <span class="label-text text-base-content undefined">Absensi</span>
+                    <span class="label-text text-base-content undefined">Laporan</span>
                 </label>
-                <input type="text" placeholder="Cth: Absensi Bulan Februari" class="input  input-bordered w-full "
+                <input type="text" placeholder="Cth: Laporan Bulan Februari" class="input  input-bordered w-full "
                     name="name" value="{{ empty(old('name')) ? $report->name : old('name') }}">
                 @error('name')
                     <label class="label">
@@ -57,7 +57,7 @@
 
             <div class="w-full">
                 <label class="label">
-                    <span class="label-text text-base-content undefined">Pilih data pengguna untuk laporan</span>
+                    <span class="label-text text-base-content undefined">Pilih data absensi untuk laporan</span>
                 </label>
                 <select class="select select-bordered w-full" name="attendance_id">
                     @foreach ($attendances as $attendance)

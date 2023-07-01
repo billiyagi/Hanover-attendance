@@ -48,7 +48,6 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
 
             //Report
-            // Route::get('/report', [ReportController::class, 'index']);
             Route::get('/report', [ReportController::class, 'index']);
             Route::get('/report/create', [ReportController::class, 'create']);
             Route::post('/report/store', [ReportController::class, 'store']);

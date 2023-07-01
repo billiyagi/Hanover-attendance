@@ -57,7 +57,7 @@
             {{-- Pilih data pengguna --}}
             <div class="w-full">
                 <label class="label">
-                    <span class="label-text text-base-content undefined">Pilih data pengguna untuk laporan</span>
+                    <span class="label-text text-base-content undefined">Pilih data absensi untuk laporan</span>
                 </label>
                 <select class="select select-bordered w-full" name="attendance_id">
                     <option disabled selected>-- Pilih Data --</option>
