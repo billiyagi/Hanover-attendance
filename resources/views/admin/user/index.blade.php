@@ -3,12 +3,37 @@
 @section('title', 'Users')
 
 @section('content')
+<div class="wrap-card-import card w-full p-6 bg-base-300 mt-2" @if($errors->has('file')) style="display: block" @else style="display: none" @endif>
+    <div class="text-xl font-semibold ">Import Data</div>
+    <div class="divider mt-2"></div>
+    <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="h-full w-full pb-6 bg-base-300">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form-control w-full undefined"><label class="label"><span
+                    class="label-text text-base-content undefined">File Excel</span></label><input type="file"
+                placeholder="" class="input-bordered w-full " name="file" required>
+                    <label class="label">
+                        <span class="label-text-alt">Format: XLS,XLSX | Maks: 5Mb</span>
+                        @error('file')
+                            <span class="label-text-alt text-red-600">{{ $message }}</span>
+                        @enderror
+                    </label>
+                </div>
+            </div>
+            <div class="mt-16">
+                <button class="btn btn-sm btn-primary float-right ms-2">Import</button>
+                <button type="button" class="btn btn-sm btn-default float-right btn-close">Tutup</button>
+            </div>
+        </div>
+    </form>
+</div>
 
     <div class="card w-full p-6 mt-2 bg-base-300 my-8">
-        <div class="text-xl font-semibold inline-block">Users<div class="inline-block float-right">
+        <div class="text-xl font-semibold inline-block">Data Users<div class="inline-block float-right">
                 <div class="inline-block float-right">
                     <a href="{{ route('users.create') }}" class="btn px-6 btn-sm normal-case btn-primary">Tambah Data</a>
-                    <a href="{{ route('users.create') }}" class="btn px-6 btn-sm normal-case btn-default">Import Data</a>
+                    <a href="#" class="btn px-6 btn-sm normal-case btn-default btn-import">Import Data</a>
                 </div>
             </div>
         </div>
@@ -143,9 +168,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm normal-case btn-warning"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm normal-case btn-info"><i class="fas fa-eye"></i></button>
-                                    <button class="btn btn-sm normal-case btn-secondary"><i class="fas fa-trash"></i></button>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm normal-case btn-warning"><i class="fas fa-edit"></i></a>
+                                        <button class="btn btn-sm normal-case btn-secondary"><i class="fas fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -156,6 +185,30 @@
             </div>
         </div>
     </div>
-    
+@endsection
+
+@section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function() {
+            // click import button
+            $('.btn-import').on('click', function(e) {
+                e.preventDefault();
+
+                $('.wrap-card-import').css({
+                    "display": "block"
+                });
+            });
+
+            // click tutup import
+            $('.wrap-card-import .btn-close').on('click', function(e) {
+                e.preventDefault();
+
+                $('.wrap-card-import').css({
+                    "display": "none"
+                });
+            });
+        });
+    </script>
 @endsection
 

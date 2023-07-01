@@ -21,11 +21,14 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = isset($this->user) ? $this->user->id : '';
+        $password_validate = $id == '' ? 'min:8' : 'sometimes';
+
         return [
             'avatar' => 'mimes:jpg,jpeg,png|max:2048',
-            'username' => 'min:5|unique:users,username',
-            'password' => 'min:8',
-            'nip' => 'unique:users,nip|max:10'
+            'username' => 'min:5|unique:users,username,'.$id,
+            'password' => $password_validate,
+            'nip' => 'max:10|unique:users,nip,'.$id
         ];
     }
 
