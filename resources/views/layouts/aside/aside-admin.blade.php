@@ -8,7 +8,7 @@
     <div class="px-5 text-xs font-bold font-sans text-slate-500">MAIN</div>
     <ul class="menu rounded-box px-5 mb-5">
         <li class="mb-3">
-            <a class="bg-base-100">
+            <a href="{{ url('/admin/dashboard') }}" class="bg-base-100">
                 <i class="fa-solid fa-gauge-high"></i>
                 Dashboard
             </a>
@@ -54,7 +54,7 @@
             </details>
         </li>
         <li class="mb-3">
-            <a>
+            <a href="{{ url('/admin/user') }}">
                 <i class="fa-solid fa-users-gear"></i>
                 Users
             </a>

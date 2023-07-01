@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\DataTables\UsersDataTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
-    public function create()
+    public function index(UsersDataTable $dataTable)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'role' => 'required|in:admin,member',
-        ]);
+        // $users = DB::table('users')->get();
+        $users = DB::select('select * from users');
 
-        $user = User::create($request->all());
-
-        return view('users.create');
-   }
+        $dataTable->render('admin.user.index');
+        
+        return view('admin.user.index', ['user' => $users]);
+    }
 }
+
 
