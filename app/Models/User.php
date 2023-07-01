@@ -38,4 +38,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $fillable = [
+        'name',
+        'username',
+        'nip',
+        'email',
+        'role',
+        'password',
+        'avatar',
+        'role_id'
+    ];
 }

@@ -1,38 +1,72 @@
-<!-- resources/views/users/create.blade.php -->
+@extends('layouts.main.admin')
 
-@extends('layouts.app')
+@section('title', 'Users')
 
 @section('content')
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="w-full sm:max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-semibold mb-6">Tambah Pengguna Baru</h2>
-
-        <form action="{{ route('users.store') }}" method="POST">
+    <div class="card w-full p-6 bg-base-300 mt-2">
+        <div class="text-xl font-semibold ">Tambah User</div>
+        <div class="divider mt-2"></div>
+        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700">Nama</label>
-                <input type="text" name="name" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
-                @error('name')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-4">
-                <label for="role" class="block text-gray-700">Peran</label>
-                <select name="role" id="role" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
-                    <option value="admin">Admin</option>
-                    <option value="member">Member</option>
-                </select>
-                @error('role')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="flex justify-end">
-                <button type="submit" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md">Tambahkan</button>
+            <div class="h-full w-full pb-6 bg-base-300">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-control w-full undefined">
+                        <label class="label">
+                            <span class="label-text text-base-content undefined">Nama Lengkap</span>
+                        </label>
+                        <input type="text" name="name" placeholder="" class="input  input-bordered w-full " value="{{ old('name') }}">
+                    </div>
+                    <div class="form-control w-full undefined"><label class="label"><span
+                        class="label-text text-base-content undefined">Foto Profil</span></label><input type="file"
+                    placeholder="" class="input-bordered w-full " name="avatar">
+                        <label class="label">
+                            <span class="label-text-alt">Format: JPG,JPEG,PNG | Maks: 2Mb</span>
+                            @error('avatar')
+                                <span class="label-text-alt text-red-600">{{ $message }}</span>
+                            @enderror
+                        </label>
+                    </div>
+                    <div class="form-control w-full undefined"><label class="label"><span
+                                class="label-text text-base-content undefined">Email</span></label><input name="email" type="email"
+                            placeholder="" class="input  input-bordered w-full " value="{{ old('email') }}" required></div>
+                    <div class="form-control w-full undefined"><label class="label"><span
+                                class="label-text text-base-content undefined">Username</span></label><input name="username" type="text"
+                            placeholder="" class="input  input-bordered w-full " value="{{ old('username') }}" required>
+                            <label class="label">
+                                @error('username')
+                                    <span class="label-text-alt text-red-600">{{ $message }}</span>
+                                @enderror
+                            </label>
+                    </div>
+                    <div class="form-control w-full undefined"><label class="label"><span
+                        class="label-text text-base-content undefined">Password</span></label><input name="password" type="password"
+                    placeholder="" class="input  input-bordered w-full " required>
+                    <label class="label">
+                        @error('password')
+                            <span class="label-text-alt text-red-600">{{ $message }}</span>
+                        @enderror
+                    </label>
+                    </div>
+                    <div class="form-control w-full undefined"><label class="label"><span
+                                class="label-text text-base-content undefined">NIP</span></label><input value="{{ old('nip') }}" name="nip" type="number"
+                            placeholder="" class="input  input-bordered w-full " required></div>
+                    <div class="form-control w-full undefined"><label class="label"><span
+                        class="label-text text-base-content undefined">Hak Akses</span></label>
+                        <select name="role_id" class="input input-bordered w-full">
+                            @foreach($roles as $role)
+                                <option {{ old('role_id') == $role->id ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-16"><button class="btn btn-primary float-right">Simpan</button></div>
             </div>
         </form>
     </div>
-</div>
+
+
+@endsection
+
+@section('script')
+
 @endsection

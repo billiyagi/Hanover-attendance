@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
-use App\Http\Controllers\UsersController;
+
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,12 +48,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit']);
             Route::put('/attendance/{id}/update', [AttendanceController::class, 'update']);
             Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
-
-            // Users
-            Route::get('/user', [UsersController::class, 'index']);
+            
 
             //Report
-            Route::get('/report', [ReportController::class, 'index']);
+            // Route::get('/report', [ReportController::class, 'index']);
+
+            // users
+            Route::resource('users', UserController::class);
         });
     });
 
@@ -64,7 +67,11 @@ Route::middleware(['auth'])->group(function () {
 
             //Report
             //Route::get('/report', [MemberReportController::class, 'index']);
-            
+      
         });
     });
+    //User
+    // Route::controller(UserController::class)->group(function () {
+    //     Route::get('user/table', 'index')->name('user/table');
+    // });
 });
