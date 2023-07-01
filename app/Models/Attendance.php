@@ -26,4 +26,10 @@ class Attendance extends Model
     {
         return $this->hasMany(AttendanceUser::class, 'attendance_user_id', 'id');
     }
+
+    // Membuat relasi one to many ke tabel report
+    public function report()
+    {
+        return $this->belongsTo(Report::class, 'attendance_id', 'id');
+    }
 }

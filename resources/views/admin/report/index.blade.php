@@ -1,145 +1,77 @@
 @extends('layouts.main.admin')
 
+@section('title', 'Laporan')
+
 @section('content')
 
 <div class="card w-full p-6 mt-2 bg-base-300 my-8">
-        <div class="text-xl font-semibold inline-block">Laporan<div class="inline-block float-right">
-                <div class="inline-block float-right"><button class="btn px-6 btn-sm normal-case btn-primary">Laporan
-                        Baru</button></div>
-            </div>
-        </div>
+    <div class="text-xl font-semibold flex justify-between items-center">
+            <form action="/admin/report" class="form-control w-1/2">
+                <div class="input-group">
+                    <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search" />
+                    <button class="btn btn-square btn-primary btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+            <a href="{{ url('/admin/report/create') }}" class="btn px-6 btn-sm normal-case btn-primary text-white"><i
+                    class="fa-solid fa-circle-plus"></i>Buat
+                Laporan</a>
+    </div>  
+
         <div class="divider mt-2"></div>
         <div class="h-full w-full pb-6 bg-base-300">
             <div class="overflow-x-auto w-full">
                 <table class="table w-full">
                     <thead>
-                        <tr class="bg-base-200">
-                            <th>Name</th>
-                            <th>Email Id</th>
-                            <th>Joined On</th>
-                            <th>Role</th>
-                            <th>Last Active</th>
+                        <tr class="bg-primary text-white">
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Tanggal Dimulai</th>
+                            <th>Tanggal Akhir</th>
+                            <th>Absensi</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="flex items-center space-x-3">
-                                    <div class="avatar">
-                                        <div class="mask mask-circle w-12 h-12"><img
-                                                src="https://reqres.in/img/faces/1-image.jpg" alt="Avatar"></div>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Alex</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>alex@dashwind.com</td>
-                            <td>18 Jun 2023</td>
-                            <td>
-                                <div class="badge badge-primary">Owner</div>
-                            </td>
-                            <td>5 hr ago</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="flex items-center space-x-3">
-                                    <div class="avatar">
-                                        <div class="mask mask-circle w-12 h-12"><img
-                                                src="https://reqres.in/img/faces/2-image.jpg" alt="Avatar"></div>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Ereena</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>ereena@dashwind.com</td>
-                            <td>13 Jun 2023</td>
-                            <td>
-                                <div class="badge badge-secondary">Admin</div>
-                            </td>
-                            <td>15 min ago</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="flex items-center space-x-3">
-                                    <div class="avatar">
-                                        <div class="mask mask-circle w-12 h-12"><img
-                                                src="https://reqres.in/img/faces/3-image.jpg" alt="Avatar"></div>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">John</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>jhon@dashwind.com</td>
-                            <td>08 Jun 2023</td>
-                            <td>
-                                <div class="badge badge-secondary">Admin</div>
-                            </td>
-                            <td>20 hr ago</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="flex items-center space-x-3">
-                                    <div class="avatar">
-                                        <div class="mask mask-circle w-12 h-12"><img
-                                                src="https://reqres.in/img/faces/4-image.jpg" alt="Avatar"></div>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Matrix</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>matrix@dashwind.com</td>
-                            <td>03 Jun 2023</td>
-                            <td>
-                                <div class="badge">Manager</div>
-                            </td>
-                            <td>1 hr ago</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="flex items-center space-x-3">
-                                    <div class="avatar">
-                                        <div class="mask mask-circle w-12 h-12"><img
-                                                src="https://reqres.in/img/faces/5-image.jpg" alt="Avatar"></div>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Virat</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>virat@dashwind.com</td>
-                            <td>29 May 2023</td>
-                            <td>
-                                <div class="badge badge-accent">Support</div>
-                            </td>
-                            <td>40 min ago</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="flex items-center space-x-3">
-                                    <div class="avatar">
-                                        <div class="mask mask-circle w-12 h-12"><img
-                                                src="https://reqres.in/img/faces/6-image.jpg" alt="Avatar"></div>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Miya</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>miya@dashwind.com</td>
-                            <td>19 May 2023</td>
-                            <td>
-                                <div class="badge badge-accent">Support</div>
-                            </td>
-                            <td>5 hr ago</td>
-                        </tr>
+                        @php
+                            $number = 1;
+                        @endphp
+                        @foreach ($reports as $report)
+                            <tr>
+                                <td>{{ $number }}</td>
+                                <td>{{ $report->name }}</td>
+                                <td>{{ $report->range_start }}</td>
+                                <td>{{ $report->range_end }}</td>
+                                <td>{{ $report->attendance()->first()['name'] }}</td>
+                                <td class="flex">
+                                    <a href="#" class="btn btn-warning btn-sm">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="/admin/report/{{ $report->id }}/edit"
+                                        class="btn btn-primary btn-sm mx-3">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <form method="post" action="/admin/report/{{ $report->id }}/delete">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-error btn-sm">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @php
+                                $number++;
+                            @endphp
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
 
 @endsection
