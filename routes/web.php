@@ -59,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
 
 
             // Data User
-            Route::get('/dataUser/{dataId}/create', [DataUserController::class, 'create'])->name('createDataUser');
+            Route::get('/dataUser/{dataId}/create', [DataUserController::class, 'create']);
             Route::post('/dataUser/store', [DataUserController::class, 'store']);
             Route::get('/dataUser/{id}', [DataUserController::class, 'index']);
             Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);

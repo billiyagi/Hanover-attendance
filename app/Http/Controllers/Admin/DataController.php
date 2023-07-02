@@ -26,7 +26,7 @@ class DataController extends Controller
     public function index(Data $data)
     {
         //
-        $datas = Data::paginate(5);
+        $datas = Data::orderBy('created_at')->paginate(5);
 
 
         return view('admin.data.index', compact('datas'));

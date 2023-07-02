@@ -92,7 +92,7 @@ document.getElementById('dataBtn').click()
 
 
 <dialog id="create_data" class="modal modal-bottom sm:modal-middle" >
-  <form class="modal-box" action="{{url('admin/data/store')}}" method="POST" enctype="multypart/form-data">
+  <form class="modal-box" action="{{'admin/data/store'}}" method="POST" enctype="multypart/form-data">
     <h3 class="font-bold text-lg pb-4">Data</h3>
      @csrf      
         <div class="">

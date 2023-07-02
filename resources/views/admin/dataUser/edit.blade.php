@@ -10,7 +10,7 @@
         <div class="divider mt-2"></div>
         <div class="h-full w-full pb-6 bg-base-300">
             <div class="overflow-x-auto w-full">
-                <form action="{{url('admin/dataUser/'.$data->id.'/update')}}" method="POST" enctype="multypart/form-data">
+                <form action="admin/dataUser/'.$data->id.'/update" method="POST" enctype="multypart/form-data">
                 @csrf    
                 @method('PUT') 
                 <table class="table w-full">

@@ -66,5 +66,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Roles::class, 'id', 'data_id');
     }
+
     
+
+    public function getAllData()
+    {
+        return DB::table('users')
+            ->join('roles', 'users.role_id', '=',
+            'roles.id')
+            ->select('users.*', 'roles.name as role')
+            ->get();
+        }
 }

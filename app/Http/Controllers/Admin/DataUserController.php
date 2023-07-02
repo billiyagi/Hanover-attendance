@@ -87,33 +87,33 @@ class DataUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-      public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
-
         $selectedUsers = $request->input('selected_users', []);
+
 
         DataUser::where('data_id', $id)->delete();
 
+
         foreach ($selectedUsers as $userId) {
-            DataUser::create([
-                'data_id' => $id,
-                'user_id' => $userId
-            ]);
+            $dataUser = new DataUser();
+            $dataUser->data_id = $id;
+            $dataUser->user_id = $userId;
+            $dataUser->save();
         }
-        
-        // Mengambil data dan data_id dari tabel Data
+
         $data = Data::findOrFail($id);
         $dataId = $data->id;
 
-        // Mengambil user_id yang berelasi dengan data_id pada tabel DataUser
         $users = User::whereIn('id', function ($query) use ($dataId) {
             $query->select('user_id')
                 ->from('data_user')
                 ->where('data_id', $dataId);
         })->get();
 
-            return redirect()->back();
+        return redirect()->back();
     }
+
     /**
      * Remove the specified resource from storage.
      */

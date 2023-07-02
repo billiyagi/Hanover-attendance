@@ -22,12 +22,7 @@ class DashboardController extends Controller
     public function member()
     {
 
-        $user = DB::table('users')
-        ->join('roles', 'users.role_id', '=',
-        'roles.id')
-        ->select('users.*', 'roles.name as role')
-        ->get();
-
+        $datas = User::all();
         return view('admin.dashboard.member', compact('user'));
     }
 
