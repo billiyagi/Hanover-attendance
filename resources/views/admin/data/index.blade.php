@@ -1,11 +1,11 @@
 @extends('layouts.main.admin')
 
-@section('title', 'Absensi')
+@section('title', 'Data')
 
 @section('content')
-    <div class="card w-full p-6 mt-2 bg-base-300 my-8">
+ <div class="card w-full p-6 mt-2 bg-base-300 my-8">
         <div class="text-xl font-semibold flex justify-between items-center">
-            <form action="/admin/attendance" class="form-control w-1/2">
+            <form action="" class="form-control w-1/2">
                 <div class="input-group">
                     <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search" />
                     <button class="btn btn-square btn-primary btn-sm">
@@ -17,9 +17,8 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ url('/admin/attendance/create') }}" class="btn px-6 btn-sm normal-case btn-primary text-white"><i
-                    class="fa-solid fa-circle-plus"></i>Buat
-                Absensi</a>
+            <a onclick="create_data.showModal()" class="btn px-6 btn-sm normal-case btn-primary text-white"><i
+                    class="fa-solid fa-circle-plus"></i a>Buat Data</a>
         </div>
         <div class="divider mt-2"></div>
         <div class="h-full w-full pb-6 bg-base-300">
@@ -28,33 +27,30 @@
                     <thead>
                         <tr class="bg-primary text-white">
                             <th>No</th>
-                            <th>Absensi</th>
-                            <th>Dimulai</th>
-                            <th>Akhir</th>
-                            <th>Data User</th>
-                            <th>Aksi</th>
+                            <th>Nama Data</th>
+                            <th>Data Dibuat</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $number = 1;
                         @endphp
-                        @foreach ($attendances as $attendance)
+                        @foreach ($datas as $data)
                             <tr>
                                 <td>{{ $number }}</td>
-                                <td>{{ $attendance->name }}</td>
-                                <td>{{ $attendance->attend_start }}</td>
-                                <td>{{ $attendance->attend_end }}</td>
-                                <td>{{ $attendance->data()->first()['name'] }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->created_at}}</td>
                                 <td class="flex">
-                                    <a href="#" class="btn btn-warning btn-sm">
+                                    <a href="/admin/dataUser/{{$data->id}}" 
+                                         class="btn btn-warning btn-sm">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a href="/admin/attendance/{{ $attendance->id }}/edit"
+                                    <a href="/admin/data/{{$data->id}}/edit"
                                         class="btn btn-primary btn-sm mx-3">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <form method="post" action="/admin/attendance/{{ $attendance->id }}/delete">
+                                     <form method="post" action="/admin/data/{{ $data->id }}/delete">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-error btn-sm">
@@ -66,12 +62,15 @@
                             @php
                                 $number++;
                             @endphp
-                        @endforeach
+                        @endforeach    
                     </tbody>
                 </table>
             </div>
+            {{$datas->links()}}
         </div>
 
-        {{ $attendances->links() }}
-    </div>
+
+
+
+
 @endsection

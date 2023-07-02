@@ -14,7 +14,7 @@ class DataUser extends Model
     //panggil tabel
     protected $table = 'data_user';
     // matikan timestamps
-    public $timestamps = false;
+    public $timestamps = true;
     //kolom yang bisa diisi
     protected $fillable = [
 

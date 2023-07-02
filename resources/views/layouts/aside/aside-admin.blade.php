@@ -1,4 +1,4 @@
-<a href="system/dashboard" class="text-2xl text-center pt-8 pb-4 px-2 font-medium block">
+<a href="{{url('/admin/data/create')}}" class="text-2xl text-center pt-8 pb-4 px-2 font-medium block">
     <img src="{{ asset('assets/img/logo/hanover-primary-white.svg') }}" alt="Hanover Light" id="hanoverLogoLight"
         class="px-10">
     <img src="{{ asset('assets/img/logo/hanover-primary-dark.svg') }}" alt="Hanover Dark" id="hanoverLogoDark"
@@ -36,8 +36,11 @@
                     Data
                 </summary>
                 <ul class="mt-3">
-                    <li><a href="">Buat Data</a></li>
-                    <li><a href="">Pegawai</a></li>
+                    <li>
+                        <li><a onclick="create_data.showModal()">Buat Data</a></li>
+                    </li>
+
+                    <li><a href="{{url('/admin/data')}}">Seluruh Data</a></li> 
                 </ul>
             </details>
         </li>
@@ -62,10 +65,10 @@
         <li class="mb-3">
             <a>
                 <i class="fa-solid fa-gear"></i>
-
                 Settings
             </a>
         </li>
     </ul>
 
 </div>
+
