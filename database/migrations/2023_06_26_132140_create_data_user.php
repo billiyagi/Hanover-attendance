@@ -9,18 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('data_user', function (Blueprint $table) {
-            $table->id();
+            // Kolom pada tabel data_user
+            $table->bigIncrements('id');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('data_user');
     }
