@@ -4,12 +4,12 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\DataUserController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -86,5 +86,4 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/present', [PresentController::class, 'index']);
         });
     });
-  
 });

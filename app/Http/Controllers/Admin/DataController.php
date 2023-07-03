@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -13,11 +14,11 @@ class DataController extends Controller
 {
 
     public function create()
-{
-    $data = Data::all(); // Ambil semua data user
+    {
+        $data = Data::all(); // Ambil semua data user
 
-    return view('admin.data.create', compact('data'));
-}
+        return view('admin.data.create', compact('data'));
+    }
 
 
     /**
@@ -30,13 +31,12 @@ class DataController extends Controller
 
 
         return view('admin.data.index', compact('datas'));
-        
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Data $data,DataRequest $request)
+    public function store(Data $data, DataRequest $request)
     {
         $validated = $request->validated();
         // Insert data ke model Data
@@ -44,19 +44,19 @@ class DataController extends Controller
         $data->name = $request->name;
         $data->save();
 
-        if($data->save() == true) {
-				// Data berhasil disimpan (true)
-        notify()->success('Berhasil menambahkan Data baru', 'Operation Success');
+        if ($data->save() == true) {
+            // Data berhasil disimpan (true)
+            notify()->success('Berhasil menambahkan Data baru', 'Operation Success');
         } else {
-				// Data gagal disimpan (false)
-        notify()->error('Gagal menambahkan Data baru', 'Operation Failed');
-         }
-         
+            // Data gagal disimpan (false)
+            notify()->error('Gagal menambahkan Data baru', 'Operation Failed');
+        }
+
         // Mendapatkan ID data yang baru saja diinsert
         $dataId = $data->id;
 
-        return redirect()->route('createDataUser', ['dataId' => $dataId]);
-        }
+        return redirect()->to('/admin/dataUser/' . $dataId . '/create');
+    }
 
     /**
      * Display the specified resource.
@@ -66,16 +66,16 @@ class DataController extends Controller
         //
     }
 
-        public function edit($id)
+    public function edit($id)
     {
         $datas = Data::all();
         $data = Data::findOrFail($id);
         $users = User::where('role_id', 2)->paginate(7);
         $selectedUsers = DataUser::where('data_id', $id)->pluck('user_id')->toArray();
-        return view('admin.data.edit', compact('datas' , 'data', 'users', 'selectedUsers'));
+        return view('admin.data.edit', compact('datas', 'data', 'users', 'selectedUsers'));
     }
 
-    
+
     /**
      * Update the specified resource in storage.
      */
@@ -103,7 +103,7 @@ class DataController extends Controller
     public function destroy(string $id, Data $data)
     {
         //
-         $data = $data->find($id);
+        $data = $data->find($id);
 
         // Hapus data dan redirect sesuai kondisi berhasil atau gagal
         if ($data->delete()) {

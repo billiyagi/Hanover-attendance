@@ -3,7 +3,7 @@
 @section('title', 'Data')
 
 @section('content')
- <div class="card w-full p-6 mt-2 bg-base-300 my-8">
+    <div class="card w-full p-6 mt-2 bg-base-300 my-8">
         <div class="text-xl font-semibold flex justify-between items-center">
             <form action="" class="form-control w-1/2">
                 <div class="input-group">
@@ -36,21 +36,24 @@
                         @php
                             $number = 1;
                         @endphp
+                        @empty($datas->all())
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-lg">Tidak ada data</td>
+                            </tr>
+                        @endempty
                         @foreach ($datas as $data)
                             <tr>
                                 <td>{{ $number }}</td>
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->created_at}}</td>
+                                <td>{{ $data->created_at }}</td>
                                 <td class="flex">
-                                    <a href="/admin/dataUser/{{$data->id}}" 
-                                         class="btn btn-warning btn-sm">
+                                    <a href="/admin/dataUser/{{ $data->id }}" class="btn btn-warning btn-sm">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a href="/admin/data/{{$data->id}}/edit"
-                                        class="btn btn-primary btn-sm mx-3">
+                                    <a href="/admin/data/{{ $data->id }}/edit" class="btn btn-primary btn-sm mx-3">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                     <form method="post" action="/admin/data/{{ $data->id }}/delete">
+                                    <form method="post" action="/admin/data/{{ $data->id }}/delete">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-error btn-sm">
@@ -62,15 +65,15 @@
                             @php
                                 $number++;
                             @endphp
-                        @endforeach    
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-            {{$datas->links()}}
+            {{ $datas->links() }}
         </div>
 
 
 
 
 
-@endsection
+    @endsection

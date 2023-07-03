@@ -4,8 +4,8 @@
 
 @section('content')
 
-<div class="card w-full p-6 mt-2 bg-base-300 my-8">
-    <div class="text-xl font-semibold flex justify-between items-center">
+    <div class="card w-full p-6 mt-2 bg-base-300 my-8">
+        <div class="text-xl font-semibold flex justify-between items-center">
             <form action="/admin/report" class="form-control w-1/2">
                 <div class="input-group">
                     <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search" />
@@ -21,7 +21,7 @@
             <a href="{{ url('/admin/report/create') }}" class="btn px-6 btn-sm normal-case btn-primary text-white"><i
                     class="fa-solid fa-circle-plus"></i>Buat
                 Laporan</a>
-    </div>  
+        </div>
 
         <div class="divider mt-2"></div>
         <div class="h-full w-full pb-6 bg-base-300">
@@ -41,6 +41,11 @@
                         @php
                             $number = 1;
                         @endphp
+                        @empty($reports->all())
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-lg">Tidak ada data</td>
+                            </tr>
+                        @endempty
                         @foreach ($reports as $report)
                             <tr>
                                 <td>{{ $number }}</td>
@@ -52,8 +57,7 @@
                                     <a href="#" class="btn btn-warning btn-sm">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a href="/admin/report/{{ $report->id }}/edit"
-                                        class="btn btn-primary btn-sm mx-3">
+                                    <a href="/admin/report/{{ $report->id }}/edit" class="btn btn-primary btn-sm mx-3">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                     <form method="post" action="/admin/report/{{ $report->id }}/delete">
@@ -74,4 +78,4 @@
             </div>
         </div>
 
-@endsection
+    @endsection

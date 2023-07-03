@@ -36,9 +36,15 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @php
                             $number = 1;
                         @endphp
+                        @empty($attendances->all())
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-lg">Tidak ada data</td>
+                            </tr>
+                        @endempty
                         @foreach ($attendances as $attendance)
                             <tr>
                                 <td>{{ $number }}</td>
