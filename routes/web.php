@@ -78,8 +78,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
+    // Member area
+    Route::middleware(['member'])->group(function () {
+        Route::prefix('member')->group(function () {
 
             // Dashboard
-            Route::get('/dashboard', [MemberDashboardController::class, 'index']);
+            Route::get('/present', [PresentController::class, 'index']);
         });
-
+    });
+  
+});

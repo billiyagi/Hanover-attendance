@@ -22,6 +22,10 @@ class Data extends Model
 
     public function attendance()
     {
+        /**
+         * Data adalah milik dari attendance yang id di tabel data
+         * berhubungan dengan data_id di tabel attendance
+         */
         return $this->belongsTo(Attendance::class, 'id', 'data_id');
     }
 }
