@@ -13,11 +13,12 @@ class PresentController extends Controller
         return view('member.present.index');
     }
 
-    public function test(Request $request)
-    {
-        $convertFromDataUri = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->data_url));
+    // Example Of Data URI to Image
+    // public function test(Request $request)
+    // {
+    //     $convertFromDataUri = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->data_url));
 
-        Storage::put('public/test.png', $convertFromDataUri);
-        dd($request->all());
-    }
+    //     Storage::put('public/test.png', $convertFromDataUri);
+    //     dd($request->all());
+    // }
 }

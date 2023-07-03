@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AttendanceController;
-use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\DataController;
+use App\Http\Controllers\Admin\DataUserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Member\PresentController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
 
+
             // Attendance
             Route::get('/attendance', [AttendanceController::class, 'index']);
             // Route::get('/attendance/search', [AttendanceController::class, 'index']);
@@ -48,13 +53,30 @@ Route::middleware(['auth'])->group(function () {
 
             //Report
             Route::get('/report', [ReportController::class, 'index']);
+            Route::get('/report/create', [ReportController::class, 'create']);
+            Route::post('/report/store', [ReportController::class, 'store']);
+            Route::get('/report/{id}/edit', [ReportController::class, 'edit']);
+            Route::put('/report/{id}/update', [ReportController::class, 'update']);
+            Route::delete('/report/{id}/delete', [ReportController::class, 'destroy']);
 
+            // Data User
+            Route::get('/dataUser/{dataId}/create', [DataUserController::class, 'create']);
+            Route::post('/dataUser/store', [DataUserController::class, 'store']);
+            Route::get('/dataUser/{id}', [DataUserController::class, 'index']);
+            Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);
+            Route::put('/dataUser/{id}/update', [DataUserController::class, 'update']);
 
-            // Settings
-            Route::get('/settings', [SettingsController::class, 'index']);
-            Route::post('/settings/store', [SettingsController::class, 'store']);
+            // Data
+            Route::get('/data', [DataController::class, 'index']);
+            Route::get('/data/create', [DataController::class, 'create']);
+            Route::post('/data/store', [DataController::class, 'store']);
+            Route::get('/data', [DataController::class, 'index']);
+            Route::delete('/data/{id}/delete', [DataController::class, 'destroy']);
+            Route::get('/data/{id}/edit', [DataController::class, 'edit']);
+            Route::put('/data/{id}/update', [DataController::class, 'update']);
         });
     });
+
 
     // Member area
     Route::middleware(['member'])->group(function () {
@@ -62,10 +84,6 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/present', [PresentController::class, 'index']);
-            // Route::post('/dashboard/test', [MemberDashboardController::class, 'test']);
-
-            //Report
-            //Route::get('/report', [MemberReportController::class, 'index']);
         });
     });
 });
