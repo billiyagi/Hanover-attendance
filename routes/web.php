@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
+use App\Http\Controllers\Member\PresentController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,6 +48,11 @@ Route::middleware(['auth'])->group(function () {
 
             //Report
             Route::get('/report', [ReportController::class, 'index']);
+
+
+            // Settings
+            Route::get('/settings', [SettingsController::class, 'index']);
+            Route::post('/settings/store', [SettingsController::class, 'store']);
         });
     });
 
@@ -56,7 +61,8 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('member')->group(function () {
 
             // Dashboard
-            Route::get('/dashboard', [MemberDashboardController::class, 'index']);
+            Route::get('/present', [PresentController::class, 'index']);
+            // Route::post('/dashboard/test', [MemberDashboardController::class, 'test']);
 
             //Report
             //Route::get('/report', [MemberReportController::class, 'index']);

@@ -60,7 +60,7 @@
             </a>
         </li>
         <li class="mb-3">
-            <a>
+            <a href="/admin/settings">
                 <i class="fa-solid fa-gear"></i>
 
                 Settings

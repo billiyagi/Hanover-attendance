@@ -73,13 +73,5 @@
         </div>
 
         {{ $attendances->links() }}
-        {{-- <div class="flex justify-end">
-            <div class="join">
-                <button class="join-item btn">1</button>
-                <button class="join-item btn btn-primary">2</button>
-                <button class="join-item btn">3</button>
-                <button class="join-item btn">4</button>
-            </div>
-        </div> --}}
     </div>
 @endsection
