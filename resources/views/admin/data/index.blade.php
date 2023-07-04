@@ -5,9 +5,9 @@
 @section('content')
     <div class="card w-full p-6 mt-2 bg-base-300 my-8">
         <div class="text-xl font-semibold flex justify-between items-center">
-            <form action="" class="form-control w-1/2">
+            <form action="/admin/data" class="form-control w-1/2">
                 <div class="input-group">
-                    <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search" />
+                    <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search" value="{{request('search')}}" />
                     <button class="btn btn-square btn-primary btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">

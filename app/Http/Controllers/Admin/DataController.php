@@ -26,9 +26,13 @@ class DataController extends Controller
      */
     public function index(Data $data)
     {
-        //
-        $datas = Data::orderBy('created_at')->paginate(5);
+        $query = Data::latest()->orderBy('created_at');
 
+        if(request('search')){
+            $query->where('name', 'like', '%' . request('search') . '%');
+        }
+
+        $datas = $query->paginate(5);
 
         return view('admin.data.index', compact('datas'));
     }
