@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Attendance extends Model
 {
@@ -31,5 +33,21 @@ class Attendance extends Model
     public function report()
     {
         return $this->belongsTo(Report::class, 'attendance_id', 'id');
+    }
+
+    // Membuat data export yang sudah terkompilasi
+    public static function exportCompiled()
+    {
+        return DB::table('attendance')->join('data', 'data.id', '=', 'attendance.data_id')->select('attendance.*', 'data.name AS data_name')->get();
+    }
+
+    public function scopeFilter($searchQuery)
+    {
+        $query = $this->query();
+        if (isset($searchQuery)) {
+            return $query->where('name', 'like', '%' . $searchQuery . '%');
+        } else {
+            return $query;
+        }
     }
 }

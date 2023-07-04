@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit']);
             Route::put('/attendance/{id}/update', [AttendanceController::class, 'update']);
             Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
+            Route::get('/attendance/export/{type}', [AttendanceController::class, 'export']);
 
             //Report
             Route::get('/report', [ReportController::class, 'index']);

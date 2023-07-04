@@ -7,7 +7,8 @@
         <div class="text-xl font-semibold flex justify-between items-center">
             <form action="/admin/attendance" class="form-control w-1/2">
                 <div class="input-group">
-                    <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search" />
+                    <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search"
+                        value="{{ !empty(request('search')) ? request('search') : '' }}" />
                     <button class="btn btn-square btn-primary btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -17,9 +18,23 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ url('/admin/attendance/create') }}" class="btn px-6 btn-sm normal-case btn-primary text-white"><i
-                    class="fa-solid fa-circle-plus"></i>Buat
-                Absensi</a>
+            <div>
+                <div class="join me-3">
+                    <a href="{{ url('/admin/attendance/export/excel') }}"
+                        class="btn px-6 btn-sm normal-case btn-success join-item text-white">
+                        <i class="fa-solid fa-file-excel"></i>
+                        Excel
+                    </a>
+                    <a href="{{ url('/admin/attendance/export/pdf') }}"
+                        class="btn px-6 btn-sm normal-case btn-error join-item text-white">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        Pdf
+                    </a>
+                </div>
+                <a href="{{ url('/admin/attendance/create') }}"
+                    class="btn px-6 btn-sm normal-case btn-primary text-white"><i class="fa-solid fa-circle-plus"></i>Buat
+                    Absensi</a>
+            </div>
         </div>
         <div class="divider mt-2"></div>
         <div class="h-full w-full pb-6 bg-base-300">

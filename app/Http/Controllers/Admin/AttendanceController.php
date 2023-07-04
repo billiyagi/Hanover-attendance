@@ -2,22 +2,37 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AttendanceExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AttendanceRequest;
 use App\Models\Attendance;
 use App\Models\Data;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Attendance $attendance)
+    public function index(Attendance $attendance, Request $request)
     {
-        $attendances = $attendance::orderBy('created_at', 'desc')->paginate(5);
-        // dd($attendances);
+        $attendances = $attendance->scopeFilter($request->search)->orderBy('created_at', 'desc')->paginate(5);
         return view('admin.attendance.index', compact('attendances'));
+    }
+
+    // Export data to Excel
+    public function export($type = 'excel')
+    {
+        // Nama filenya digenerate sesuai tanggal dan waktu downloadnya
+        $fileName = 'absensi_' . date('Y-m-d_H-i-s');
+
+        // Generate File Excel & Pdf
+        if ($type == 'excel') {
+            return (new AttendanceExport)->download($fileName . '.xlsx');
+        } elseif ($type == 'pdf') {
+            return Excel::download(new AttendanceExport, $fileName . '.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        }
     }
 
     public function create()
