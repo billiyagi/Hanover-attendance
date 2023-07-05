@@ -42,8 +42,9 @@
             </form>
             <div class="inline-block float-right">
                 <div class="inline-block float-right">
-                <a href="#" class="btn px-6 btn-sm normal-case btn-primary float center btn-import]]"> Import Data </a>
+                <a href="#" class="btn px-6 btn-sm normal-case btn-default btn-primary btn-import">Import Data</a>
                     <div class="dropdown">
+
                     </div>
             
                     <div class="join me-3 ">
