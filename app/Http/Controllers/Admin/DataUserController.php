@@ -1,12 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DataUserExport;
 use App\Http\Controllers\Controller;
 use App\Models\Data;
 use App\Models\DataUser;
 use App\Models\User; 
-
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+
 use Symfony\Component\VarDumper\Cloner\Data as ClonerData;
 
 class DataUserController extends Controller
@@ -30,7 +32,26 @@ class DataUserController extends Controller
         // Mengirim data ke tampilan edit
         return view('admin.dataUser.index', compact('data', 'users'));
     }
+
+
+    public function exportDataUser($id)
+    {
+        // Mengambil data dan data_id dari tabel Data
+        $data = Data::findOrFail($id);
+        $dataId = $data->id;
+
+        // Mengambil user_id yang berelasi dengan data_id pada tabel DataUser
+        $users = User::whereIn('id', function ($query) use ($dataId) {
+            $query->select('user_id')
+                ->from('data_user')
+                ->where('data_id', $dataId);
+        })->get();
+
+        // Ekspor data ke file Excel Dengan Format Data User_(Nama Data)
+        return Excel::download(new DataUserExport($data, $users), 'Data User_' . $data->name . '.xlsx');
+    }
     
+
     public function create($dataId)
     {
         $data = Data::find($dataId);
