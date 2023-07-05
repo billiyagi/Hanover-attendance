@@ -49,4 +49,12 @@ class User extends Authenticatable
         'avatar',
         'role_id'
     ];
+
+    public function scopeSearch($query, $value)
+    {
+        return $query->where('name', 'like', '%'.$value.'%')
+                    ->orWhere('email', 'like', '%'.$value.'%')
+                    ->orWhere('nip', 'like', '%'.$value.'%')
+                    ->orWhere('role', 'like', '%'.$value.'%');
+    }
 }

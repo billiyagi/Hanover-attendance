@@ -5,11 +5,9 @@ use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
-
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\UserController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +35,6 @@ Route::middleware(['auth'])->group(function () {
     // Admin area
     Route::middleware(['admin'])->group(function () {
         Route::prefix('admin')->group(function () {
-        
 
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
@@ -58,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
             // users
             Route::group(['prefix' => 'users'], function() {
                 Route::post('/import', [UserController::class, 'importExcel'])->name('users.import');
+                Route::get('/export/{type}', [UserController::class, 'export'])->name('users.export');
             });
             Route::resource('users', UserController::class);
         });
@@ -72,7 +70,6 @@ Route::middleware(['auth'])->group(function () {
 
             //Report
             //Route::get('/report', [MemberReportController::class, 'index']);
-
         });
     });
     //User

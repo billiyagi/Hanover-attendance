@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Roles;
+use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -37,11 +39,17 @@ class UserController extends Controller
         return view('admin.user.create', compact('roles'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->paginate(10);
+        $q = $request->q;
 
-        return view('admin.user.index', compact('users'));
+        $users = User::where(function($query) use($q) {
+            if($q) {
+                $query->search($q);
+            }
+        })->latest()->paginate(5)->withQueryString();
+
+        return view('admin.user.index', compact('users', 'q'));
     }
 
     public function store(UserRequest $request)
@@ -68,7 +76,9 @@ class UserController extends Controller
             'role_id' => $request->role_id
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User berhasil disimpan!');
+        notify()->success('User berhasil disimpan!');
+
+        return redirect()->route('users.index');
     }
 
     public function edit(User $user)
@@ -128,7 +138,9 @@ class UserController extends Controller
             abort(500);
         }
 
-        return redirect()->route('users.index')->with('success', 'User berhasil disimpan!');
+        notify()->success('User berhasil disimpan!');
+
+        return redirect()->route('users.index');
     }
 
     public function destroy(User $user)
@@ -145,7 +157,9 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus!');
+        notify()->success('User berhasil dihapus!');
+
+        return redirect()->route('users.index');
     }
 
     public function importExcel(Request $request)
@@ -174,6 +188,38 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->route('users.index')->with('success', 'User berhasil disimpan');
+        notify()->success('User berhasil disimpan!');
+
+        return redirect()->route('users.index');
+    }
+
+    public function export($type)
+    {
+        if($type == "excel") {
+            return $this->exportExcel();
+        } else {
+            return $this->exportPdf();
+        }    
+    }
+
+    public function show(User $user)
+    {
+        return view('admin.user.show', compact('user'));
+    }
+
+    private function exportExcel()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    private function exportPdf()
+    {
+        $users = User::all();
+
+        $pdf = Pdf::loadView('exports.users', [
+            'users' => $users
+        ]);
+        
+        return $pdf->download('users.pdf');
     }
 }

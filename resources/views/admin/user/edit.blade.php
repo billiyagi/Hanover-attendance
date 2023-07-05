@@ -18,7 +18,7 @@
                         <input type="text" name="name" placeholder="" class="input  input-bordered w-full " value="{{ $user->name }}" required>
                     </div>
                     <div class="form-control w-full undefined"><label class="label"><span
-                        class="label-text text-base-content undefined">Foto Profil</span></label><input type="file"
+                        class="label-text text-base-content undefined">Avatar</span></label><input type="file"
                     placeholder="" class="input-bordered w-full " name="avatar">
                         <label class="label">
                             <span class="label-text-alt">Format: JPG,JPEG,PNG | Maks: 2Mb</span>
