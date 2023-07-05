@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DataUserExport;
 use App\Http\Controllers\Controller;
 use App\Models\Data;
 use App\Models\DataUser;
-use App\Models\DataUserExport;
 use App\Models\User; 
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;

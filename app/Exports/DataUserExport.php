@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
+
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\DataUser;
 use App\Models\User;
