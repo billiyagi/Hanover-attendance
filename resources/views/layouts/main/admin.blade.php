@@ -11,7 +11,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     @notifyCss
 
-    @yield('style')
+    
 
     <title>Hanover :: @yield('title')</title>
     {{-- @vite('resources/css/app.css') --}}

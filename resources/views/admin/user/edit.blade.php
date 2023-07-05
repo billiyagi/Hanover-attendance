@@ -1,6 +1,6 @@
 @extends('layouts.main.admin')
 
-@section('title', 'Users')
+@section('title', 'CreateUsers')
 
 @section('content')
     <div class="card w-full p-6 bg-base-300 mt-2">

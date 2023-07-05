@@ -1,6 +1,6 @@
 @extends('layouts.main.admin')
 
-@section('title', 'Users')
+@section('title', 'CreateUsers')
 
 @section('content')
 <div class="wrap-card-import card w-full p-6 bg-base-300 mt-2" @if($errors->has('file')) style="display: block" @else style="display: none" @endif>
@@ -34,7 +34,7 @@
             <form action="" method="GET" class="inline-block">
                 <div class="join">
                     <input value="{{ $q }}" name="q" class="input input-sm input-bordered join-item" placeholder="Search..."/>
-                    <button class="btn btn-primary btn-sm join-item rounded">
+                    <button class="btn btn-primary btn-sm join-item rounded float-left">
                         <i class="fas fa-search"></i>
                     </button>
                   </div>
@@ -42,14 +42,24 @@
             </form>
             <div class="inline-block float-right">
                 <div class="inline-block float-right">
-                    <a href="{{ route('users.create') }}" class="btn px-6 btn-sm normal-case btn-primary">Tambah Data</a>
-                    <a href="#" class="btn px-6 btn-sm normal-case btn-default btn-import">Import Data</a>
+                <a href="#" class="btn px-6 btn-sm normal-case btn-primary float center btn-import]]"> Import Data </a>
                     <div class="dropdown">
-                        <label tabindex="0" class="btn btn-sm m-1 capitalize">Export Data</label>
-                        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                          <li><a href="{{ route('users.export', 'excel') }}">Excel</a></li>
-                          <li><a href="{{ route('users.export', 'pdf') }}">PDF</a></li>
-                        </ul>
+                    </div>
+            
+                    <div class="join me-3 ">
+                     <a href="{{ route('users.export', 'excel') }}" class="btn px-6 btn-sm normal-case btn-success join-tem text-white float-right">
+                       <i class="fa-solid fa-file-excel"></i>Excel
+                    </a>
+
+    
+                <a href="{{ route('users.export', 'pdf') }}" class="btn px-6 btn-sm normal-case btn-error join-tem text-white" style="background-color: red;">
+                     <i class="fa-solid fa-file-pdf"></i>pdf
+                     </a>
+                    </div>
+
+                    <div class="join me-3">
+                    <a href="{{ route('users.create') }}" class="btn px-6 btn-sm normal-case btn-primary ">Tambah Data</a>
+
                     </div>
                 </div>
             </div>
