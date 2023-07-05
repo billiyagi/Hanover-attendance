@@ -169,8 +169,10 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class
     ])->toArray(),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -184,7 +186,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

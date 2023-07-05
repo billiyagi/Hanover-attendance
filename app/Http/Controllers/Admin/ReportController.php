@@ -8,9 +8,8 @@ use App\Models\Attendance;
 use App\Models\Data;
 use App\Models\Report;
 use Illuminate\Http\Request;
-
-
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReportExport;
 
 class ReportController extends Controller
 {
@@ -19,12 +18,36 @@ class ReportController extends Controller
      */
     public function index(Report $report)
     {
-        //
-        $reports = $report::orderBy('created_at', 'desc')->paginate(5);
-        return view('admin.report.index', compact('reports'));
+         // Tampilkan halaman index dengan semua data report
+       $query = Report::latest()->orderBy('created_at');
+
+       if(request('search')){
+           $query->where('name', 'like', '%' . request('search') . '%');
+       }
+
+       $reports = $query->paginate(5);
+
+       return view('admin.report.index', compact('reports'));
 
         
     }
+
+        // Export data ke excel
+        public function export($type = 'excel')
+        {
+            // Nama file digenarate sesuai tanggal dan waktu downloadnya
+            $fileName = 'report-' . date('Y-m-d_H-i-s');
+
+            // Generate file excel & pdf
+            if ($type == 'excel') {
+                return Excel::download(new ReportExport, $fileName . '.xlsx');
+            } elseif ($type == 'pdf') {
+                return Excel::download(new ReportExport, $fileName . '.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+            }
+
+
+            //return Excel::download(new ReportExport, 'report.xlsx');
+        }
 
     public function create()
     {

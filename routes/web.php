@@ -12,6 +12,7 @@ use App\Http\Controllers\Member\PresentController;
 use Illuminate\Support\Facades\Route;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\Member\PresentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,14 +53,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit']);
             Route::put('/attendance/{id}/update', [AttendanceController::class, 'update']);
             Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
+            Route::get('/attendance/export/{type}', [AttendanceController::class, 'export']);
 
             //Report
             Route::get('/report', [ReportController::class, 'index']);
+            Route::get('/report/search', [ReportController::class, 'index']);
             Route::get('/report/create', [ReportController::class, 'create']);
             Route::post('/report/store', [ReportController::class, 'store']);
             Route::get('/report/{id}/edit', [ReportController::class, 'edit']);
             Route::put('/report/{id}/update', [ReportController::class, 'update']);
             Route::delete('/report/{id}/delete', [ReportController::class, 'destroy']);
+            Route::get('/report/export/{type}', [ReportController::class, 'export']);
 
             // Data User
             Route::get('/dataUser/{dataId}/create', [DataUserController::class, 'create']);
