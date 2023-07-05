@@ -17,7 +17,7 @@ class Member
     {
         // check if user is not member
         if (auth()->user()->role_id == 1) {
-            return redirect()->route('admin-dashboard');
+            return redirect()->to('/admin/dashboard');
         }
 
         return $next($request);

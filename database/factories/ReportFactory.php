@@ -18,6 +18,12 @@ class ReportFactory extends Factory
     {
         return [
             //
+
+            'name' => $this->faker->name(),
+            'range_start' => $this->faker->dateTimeBetween('-1 week', 'now'),
+            'range_end' => $this->faker->dateTimeBetween('-1 week', 'now'),
+            'attendance_id' => 1
+
         ];
     }
 }
