@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\DB;
+
 
 class User extends Authenticatable
 {
@@ -40,44 +40,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    use HasFactory;
-    //panggil tabel
-    protected $table = 'users';
-    // matikan timestamps
-    public $timestamps = false;
-    //kolom yang bisa diisi
+
     protected $fillable = [
 
-    'name',
-    'username',
-    'nip',
-    'email_verified_at',
-    'password',
-    'avatar',
-    'remember_token',
-    'created_at',
-    'edit_at',
-    'role_id',
-    
+        'name',
+        'username',
+        'nip',
+        'email',
+        'role',
+        'password',
+        'avatar',
+        'role_id'
     ];
 
-    // Membuat relasi one to many ke tabel roles
-    public function roles()
-    {
-        return $this->hasMany(Roles::class, 'id', 'data_id');
-    }
-
-    
-
-    public function getAllData()
-    {
-        return DB::table('users')
-            ->join('roles', 'users.role_id', '=',
-            'roles.id')
-            ->select('users.*', 'roles.name as role')
-            ->get();
-        }
-      public function scopeSearch($query, $value)
+    public function scopeSearch($query, $value)
     {
         return $query->where('name', 'like', '%'.$value.'%')
                     ->orWhere('email', 'like', '%'.$value.'%')
