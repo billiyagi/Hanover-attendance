@@ -39,7 +39,6 @@ Route::middleware(['auth'])->group(function () {
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
 
-            
             // Attendance
             Route::get('/attendance', [AttendanceController::class, 'index']);
             // Route::get('/attendance/search', [AttendanceController::class, 'index']);
@@ -61,7 +60,6 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('users', UserController::class);
         });
     });
-
 
     // Member area
     Route::middleware(['member'])->group(function () {
