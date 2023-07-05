@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
+use App\Http\Controllers\Member\PresentController;
 use Illuminate\Support\Facades\Route;
+
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Member\PresentController;
 
@@ -68,7 +70,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/dataUser/store', [DataUserController::class, 'store']);
             Route::get('/dataUser/{id}', [DataUserController::class, 'index']);
             Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);
+            Route::get('/admin/dataUser/{id}/export', [DataUserController::class, 'exportDataUser'])->name('dataUser.export');
             Route::put('/dataUser/{id}/update', [DataUserController::class, 'update']);
+            
 
             // Data
             Route::get('/data', [DataController::class, 'index']);

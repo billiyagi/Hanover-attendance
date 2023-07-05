@@ -51,6 +51,7 @@
             <div class="mt-16">
                 <div class="float-right">
                     <a href="{{ url('/admin/data') }}" class="btn btn-neutral mr-3">Kembali</a>
+                    <a href="{{ route('dataUser.export', ['id' => $data->id]) }}" class="btn btn-primary mr-3">Export Data User</a>
                 </div>
             </div>
                     
