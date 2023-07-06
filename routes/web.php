@@ -12,7 +12,6 @@ use App\Http\Controllers\Member\PresentController;
 use Illuminate\Support\Facades\Route;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use App\Http\Controllers\Member\PresentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/dataUser/store', [DataUserController::class, 'store']);
             Route::get('/dataUser/{id}', [DataUserController::class, 'index']);
             Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);
-            Route::get('/admin/dataUser/{id}/export', [DataUserController::class, 'exportDataUser'])->name('dataUser.export');
+            Route::get('/dataUser/{id}/export/{type}', [DataUserController::class, 'export']);
             Route::put('/dataUser/{id}/update', [DataUserController::class, 'update']);
             
 
@@ -82,6 +81,7 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/data/{id}/delete', [DataController::class, 'destroy']);
             Route::get('/data/{id}/edit', [DataController::class, 'edit']);
             Route::put('/data/{id}/update', [DataController::class, 'update']);
+            Route::get('/data/export/{type}', [DataController::class, 'export']);
         });
     });
 

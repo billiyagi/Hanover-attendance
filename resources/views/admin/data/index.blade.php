@@ -17,6 +17,20 @@
                     </button>
                 </div>
             </form>
+            <div>
+                <div class="join me-3">
+                    <a href="{{ url('/admin/data/export/excel') }}"
+                        class="btn px-6 btn-sm normal-case btn-success join-item text-white">
+                        <i class="fa-solid fa-file-excel"></i>
+                        Excel
+                    </a>
+                    <a href="{{ url('/admin/data/export/pdf') }}"
+                        class="btn px-6 btn-sm normal-case btn-error join-item text-white">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        Pdf
+                    </a>
+                </div>
+            </div>
             <a onclick="create_data.showModal()" class="btn px-6 btn-sm normal-case btn-primary text-white"><i
                     class="fa-solid fa-circle-plus"></i a>Buat Data</a>
         </div>
