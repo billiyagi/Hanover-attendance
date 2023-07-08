@@ -17,9 +17,26 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ url('/admin/attendance/create') }}" class="btn px-6 btn-sm normal-case btn-primary text-white"><i
-                    class="fa-solid fa-circle-plus"></i>Buat
-                Absensi</a>
+            <div>
+                <button class="btn btn-info text-white me-3 btn-sm normal-case"><i
+                        class="fa-solid fa-file-import"></i>Import
+                </button>
+                <div class="join me-3">
+                    <a href="{{ url('/admin/attendance/export/excel') }}"
+                        class="btn px-6 btn-sm normal-case btn-success join-item text-white">
+                        <i class="fa-solid fa-file-excel"></i>
+                        Excel
+                    </a>
+                    <a href="{{ url('/admin/attendance/export/pdf') }}"
+                        class="btn px-6 btn-sm normal-case btn-error join-item text-white">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        Pdf
+                    </a>
+                </div>
+                <a href="{{ url('/admin/attendance/create') }}"
+                    class="btn px-6 btn-sm normal-case btn-primary text-white"><i class="fa-solid fa-circle-plus"></i>Buat
+                    Absensi</a>
+            </div>
         </div>
         <div class="divider mt-2"></div>
         <div class="h-full w-full pb-6 bg-base-300">
@@ -73,13 +90,5 @@
         </div>
 
         {{ $attendances->links() }}
-        {{-- <div class="flex justify-end">
-            <div class="join">
-                <button class="join-item btn">1</button>
-                <button class="join-item btn btn-primary">2</button>
-                <button class="join-item btn">3</button>
-                <button class="join-item btn">4</button>
-            </div>
-        </div> --}}
     </div>
 @endsection
