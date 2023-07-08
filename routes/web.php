@@ -47,16 +47,43 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit']);
             Route::put('/attendance/{id}/update', [AttendanceController::class, 'update']);
             Route::delete('/attendance/{id}/delete', [AttendanceController::class, 'destroy']);
-            
+            Route::get('/attendance/export/{type}', [AttendanceController::class, 'export']);
 
             //Report
-            // Route::get('/report', [ReportController::class, 'index']);
+            Route::get('/report', [ReportController::class, 'index']);
+            Route::get('/report/search', [ReportController::class, 'index']);
+            Route::get('/report/create', [ReportController::class, 'create']);
+            Route::post('/report/store', [ReportController::class, 'store']);
+            Route::get('/report/{id}/edit', [ReportController::class, 'edit']);
+            Route::put('/report/{id}/update', [ReportController::class, 'update']);
+            Route::delete('/report/{id}/delete', [ReportController::class, 'destroy']);
+            Route::get('/report/export/{type}', [ReportController::class, 'export']);
 
+            // Data User
+            Route::get('/dataUser/{dataId}/create', [DataUserController::class, 'create']);
+            Route::post('/dataUser/store', [DataUserController::class, 'store']);
+            Route::get('/dataUser/{id}', [DataUserController::class, 'index']);
+            Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);
+            Route::get('/dataUser/{id}/export/{type}', [DataUserController::class, 'export']);
+            Route::put('/dataUser/{id}/update', [DataUserController::class, 'update']);
+            
+
+            // Data
+            Route::get('/data', [DataController::class, 'index']);
+            Route::get('/data/create', [DataController::class, 'create']);
+            Route::post('/data/store', [DataController::class, 'store']);
+            Route::get('/data', [DataController::class, 'index']);
+            Route::delete('/data/{id}/delete', [DataController::class, 'destroy']);
+            Route::get('/data/{id}/edit', [DataController::class, 'edit']);
+            Route::put('/data/{id}/update', [DataController::class, 'update']);
+            Route::get('/data/export/{type}', [DataController::class, 'export']);
+          
             // users
             Route::group(['prefix' => 'users'], function() {
                 Route::post('/import', [UserController::class, 'importExcel'])->name('users.import');
                 Route::get('/export/{type}', [UserController::class, 'export'])->name('users.export');
             });
+          
             Route::resource('users', UserController::class);
         });
     });
@@ -67,13 +94,6 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/dashboard', [MemberDashboardController::class, 'index']);
-
-            //Report
-            //Route::get('/report', [MemberReportController::class, 'index']);
         });
     });
-    //User
-    // Route::controller(UserController::class)->group(function () {
-    //     Route::get('user/table', 'index')->name('user/table');
-    // });
 });

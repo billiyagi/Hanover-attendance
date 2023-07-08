@@ -5,10 +5,24 @@
 @section('content')
 
     <div class="card w-full p-6 mt-2 bg-base-300 my-8">
-        <div class="text-xl font-semibold inline-block">{{ $data->name }}</div>
-        <div class="inline-block float-right">
-            <!-- Tambahkan konten tambahan di sini jika diperlukan -->
+        <div class="text-xl font-semibold flex justify-between items-center">
+            <div class="text-xl font-semibold inline-block">{{ $data->name }}</div>
+            <div>
+                <div class="join me-3">
+                    <a href="{{ url('/admin/dataUser/' . $data->id . '/export/excel') }}"
+                        class="btn px-6 btn-sm normal-case btn-success join-item text-white">
+                        <i class="fa-solid fa-file-excel"></i>
+                        Excel
+                    </a>
+                    <a href="{{ url('/admin/dataUser/' . $data->id . '/export/pdf') }}"
+                        class="btn px-6 btn-sm normal-case btn-error join-item text-white">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        Pdf
+                    </a>
+                </div>
+            </div>
         </div>
+
         <div class="divider mt-2"></div>
         <div class="h-full w-full pb-6 bg-base-300">
             <div class="overflow-x-auto w-full">
@@ -51,7 +65,6 @@
             <div class="mt-16">
                 <div class="float-right">
                     <a href="{{ url('/admin/data') }}" class="btn btn-neutral mr-3">Kembali</a>
-                    <a href="{{ route('dataUser.export', ['id' => $data->id]) }}" class="btn btn-primary mr-3">Export Data User</a>
                 </div>
             </div>
                     

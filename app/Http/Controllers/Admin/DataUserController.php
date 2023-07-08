@@ -34,7 +34,7 @@ class DataUserController extends Controller
     }
 
 
-    public function exportDataUser($id)
+    public function export($id, $type = 'excel')
     {
         // Mengambil data dan data_id dari tabel Data
         $data = Data::findOrFail($id);
@@ -47,8 +47,14 @@ class DataUserController extends Controller
                 ->where('data_id', $dataId);
         })->get();
 
-        // Ekspor data ke file Excel Dengan Format Data User_(Nama Data)
-        return Excel::download(new DataUserExport($data, $users), 'Data User_' . $data->name . '.xlsx');
+
+
+        // Generate File Excel & Pdf
+        if ($type == 'excel') {
+            return Excel::download(new DataUserExport($data, $users), 'Data User_' . $data->name . '.xlsx');
+        } elseif ($type == 'pdf') {
+            return Excel::download(new DataUserExport($data, $users), 'Data User_' . $data->name . '.pdf');
+        }
     }
     
 
