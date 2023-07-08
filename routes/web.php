@@ -11,9 +11,6 @@ use App\Http\Controllers\Member\DashboardController as MemberDashboardController
 use App\Http\Controllers\Member\PresentController;
 use Illuminate\Support\Facades\Route;
 
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use App\Http\Controllers\Member\PresentController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);
             Route::get('/admin/dataUser/{id}/export', [DataUserController::class, 'exportDataUser'])->name('dataUser.export');
             Route::put('/dataUser/{id}/update', [DataUserController::class, 'update']);
-            
+
 
             // Data
             Route::get('/data', [DataController::class, 'index']);
