@@ -38,8 +38,7 @@
         <form method="dialog" class="modal-box">
             <h3 class="font-bold text-lg">Are you sure want to exit from the system?</h3>
             <p class="py-4">Is there any changes will not save.</p>
-            <div class="modal-action">ges spertinya ada kerusakan di code kita di main
-                <!-- if there is a button in form, it will close the modal -->
+            <div class="modal-action">
                 <button class="btn">Close</button>
                 <a href="{{ route('logout') }}" class="btn bg-red-600 text-white hover:bg-red-800">Sign Out</a>
             </div>
