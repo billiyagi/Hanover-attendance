@@ -40,7 +40,7 @@
                     <img src="https://avatars.githubusercontent.com/u/89958256?v=4" />
                 </div>
             </div>
-            <div class="mt-2">Account</div>
+            <div class="mt-2">Akun</div>
         </div>
     </a>
 </div>
