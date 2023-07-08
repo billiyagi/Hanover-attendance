@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DataExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DataRequest;
 use Illuminate\Http\Request;
 use App\Models\Data;
 use App\Models\DataUser;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class DataController extends Controller
@@ -36,6 +38,17 @@ class DataController extends Controller
 
         return view('admin.data.index', compact('datas'));
     }
+
+        public function export($type = 'excel')
+    {
+        // Generate File Excel & Pdf
+        if ($type == 'excel') {
+            return Excel::download(new DataExport(), 'Data.xlsx');
+        } elseif ($type == 'pdf') {
+            return Excel::download(new DataExport(), 'Data.pdf');
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.
