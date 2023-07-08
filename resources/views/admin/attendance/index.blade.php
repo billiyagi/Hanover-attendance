@@ -18,9 +18,6 @@
                 </div>
             </form>
             <div>
-                <button class="btn btn-info text-white me-3 btn-sm normal-case"><i
-                        class="fa-solid fa-file-import"></i>Import
-                </button>
                 <div class="join me-3">
                     <a href="{{ url('/admin/attendance/export/excel') }}"
                         class="btn px-6 btn-sm normal-case btn-success join-item text-white">

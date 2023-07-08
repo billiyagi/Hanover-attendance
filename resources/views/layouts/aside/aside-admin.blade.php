@@ -56,14 +56,14 @@
         <li class="mb-3">
             <a href="{{ route('users.index') }}">
                 <i class="fa-solid fa-users-gear"></i>
-                Users
+                Pengguna
             </a>
         </li>
         <li class="mb-3">
             <a>
                 <i class="fa-solid fa-gear"></i>
 
-                Settings
+                Pengaturan
             </a>
         </li>
     </ul>
