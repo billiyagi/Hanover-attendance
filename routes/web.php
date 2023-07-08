@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\DataController;
+use App\Http\Controllers\Admin\DataUserController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
+use App\Http\Controllers\Member\PresentController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
 
+
             // Attendance
             Route::get('/attendance', [AttendanceController::class, 'index']);
             // Route::get('/attendance/search', [AttendanceController::class, 'index']);
@@ -64,9 +67,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/dataUser/store', [DataUserController::class, 'store']);
             Route::get('/dataUser/{id}', [DataUserController::class, 'index']);
             Route::get('/dataUser/{id}/edit', [DataUserController::class, 'edit']);
-            Route::get('/dataUser/{id}/export/{type}', [DataUserController::class, 'export']);
+            Route::get('/admin/dataUser/{id}/export', [DataUserController::class, 'exportDataUser'])->name('dataUser.export');
             Route::put('/dataUser/{id}/update', [DataUserController::class, 'update']);
-            
+
 
             // Data
             Route::get('/data', [DataController::class, 'index']);
@@ -76,24 +79,16 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/data/{id}/delete', [DataController::class, 'destroy']);
             Route::get('/data/{id}/edit', [DataController::class, 'edit']);
             Route::put('/data/{id}/update', [DataController::class, 'update']);
-            Route::get('/data/export/{type}', [DataController::class, 'export']);
-          
-            // users
-            Route::group(['prefix' => 'users'], function() {
-                Route::post('/import', [UserController::class, 'importExcel'])->name('users.import');
-                Route::get('/export/{type}', [UserController::class, 'export'])->name('users.export');
-            });
-          
-            Route::resource('users', UserController::class);
         });
     });
+
 
     // Member area
     Route::middleware(['member'])->group(function () {
         Route::prefix('member')->group(function () {
 
             // Dashboard
-            Route::get('/dashboard', [MemberDashboardController::class, 'index']);
+            Route::get('/present', [PresentController::class, 'index']);
         });
     });
 });

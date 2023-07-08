@@ -10,9 +10,6 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     @notifyCss
-
-    
-
     <title>Hanover :: @yield('title')</title>
     {{-- @vite('resources/css/app.css') --}}
 </head>
@@ -41,7 +38,7 @@
         <form method="dialog" class="modal-box">
             <h3 class="font-bold text-lg">Are you sure want to exit from the system?</h3>
             <p class="py-4">Is there any changes will not save.</p>
-            <div class="modal-action">
+            <div class="modal-action">ges spertinya ada kerusakan di code kita di main
                 <!-- if there is a button in form, it will close the modal -->
                 <button class="btn">Close</button>
                 <a href="{{ route('logout') }}" class="btn bg-red-600 text-white hover:bg-red-800">Sign Out</a>
