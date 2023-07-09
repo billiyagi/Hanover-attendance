@@ -9,17 +9,28 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('role', ['admin', 'member'])->default('member');
+            $table->string('username')->unique();
+            $table->char('nip', 10)->unique();
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+
+            // Passsowrd akan menjadi PIN ketika akun tersebut berjenis 'employee'
+            $table->string('password');
+            $table->string('avatar');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }
