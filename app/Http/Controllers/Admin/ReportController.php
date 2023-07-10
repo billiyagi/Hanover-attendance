@@ -18,36 +18,34 @@ class ReportController extends Controller
      */
     public function index(Report $report)
     {
-         // Tampilkan halaman index dengan semua data report
-       $query = Report::latest()->orderBy('created_at');
+        // Tampilkan halaman index dengan semua data report
+        $query = Report::latest()->orderBy('created_at');
 
-       if(request('search')){
-           $query->where('name', 'like', '%' . request('search') . '%');
-       }
+        if (request('search')) {
+            $query->where('name', 'like', '%' . request('search') . '%');
+        }
 
-       $reports = $query->paginate(5);
+        $reports = $query->paginate(5);
 
-       return view('admin.report.index', compact('reports'));
-
-        
+        return view('admin.report.index', compact('reports'));
     }
 
-        // Export data ke excel
-        public function export($type = 'excel')
-        {
-            // Nama file digenarate sesuai tanggal dan waktu downloadnya
-            $fileName = 'report-' . date('Y-m-d_H-i-s');
+    // Export data ke excel
+    public function export($type = 'excel')
+    {
+        // Nama file digenarate sesuai tanggal dan waktu downloadnya
+        $fileName = 'report-' . date('Y-m-d_H-i-s');
 
-            // Generate file excel & pdf
-            if ($type == 'excel') {
-                return Excel::download(new ReportExport, $fileName . '.xlsx');
-            } elseif ($type == 'pdf') {
-                return Excel::download(new ReportExport, $fileName . '.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-            }
-
-
-            //return Excel::download(new ReportExport, 'report.xlsx');
+        // Generate file excel & pdf
+        if ($type == 'excel') {
+            return Excel::download(new ReportExport, $fileName . '.xlsx');
+        } elseif ($type == 'pdf') {
+            return Excel::download(new ReportExport, $fileName . '.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
         }
+
+
+        //return Excel::download(new ReportExport, 'report.xlsx');
+    }
 
     public function create()
     {
@@ -58,17 +56,17 @@ class ReportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ReportRequest $request,Report $report)
+    public function store(ReportRequest $request, Report $report)
     {
         // Tambah data dan redirect sesuai kondisi berhasil atau gagal
         if ($report::create($request->validated())) {
             // Berhasil
-           notify()->success('Laporan Berhasil Dibuat', 'Operation Success');
-           return redirect()->to('/admin/report');
+            notify()->success('Laporan Berhasil Dibuat', 'Operation Success');
+            return redirect()->to('/admin/report');
         } else {
             // Gagal
-           notify()->error('Laporan Gagal Dibuat', 'Operation Failed');
-           return redirect()->to('/admin/report');
+            notify()->error('Laporan Gagal Dibuat', 'Operation Failed');
+            return redirect()->to('/admin/report');
         }
     }
 
@@ -92,7 +90,7 @@ class ReportController extends Controller
      */
     public function update(string $id, ReportRequest $request, Report $report)
     {
-        //Temukan data yang akan diupdate 
+        //Temukan data yang akan diupdate
         $report = $report::find($id);
 
         //Ubah data dan redirect sesuai kondisi berhasil atau gagal
@@ -105,8 +103,6 @@ class ReportController extends Controller
             notify()->error('Laporan Gagal Diubah', 'Operation Failed');
             return redirect()->to('/admin/report');
         }
-
-
     }
 
     /**
@@ -118,7 +114,7 @@ class ReportController extends Controller
         $report = $report::find($id);
 
         //Hapus data dan redirect sesuai kondisi berhasil atau gagal
-        if ($report->delete()){
+        if ($report->delete()) {
             //Berhasil
             notify()->success('Laporan Berhasil Dihapus', 'Operation Success');
             return redirect()->to('/admin/report');

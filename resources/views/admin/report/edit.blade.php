@@ -43,8 +43,7 @@
                         <span class="label-text text-base-content undefined">Akhir</span>
                     </label>
                     <input type="date" placeholder="Bulan Februari" class="input  input-bordered w-full "
-                        name="range_end"
-                        value="{{ empty(old('range_end')) ? $report->range_end : old('range_end') }}">
+                        name="range_end" value="{{ empty(old('range_end')) ? $report->range_end : old('range_end') }}">
                     @error('range_end')
                         <label class="label">
                             <span class="label-text-alt text-red-600">{{ $message }}</span>
