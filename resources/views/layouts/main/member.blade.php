@@ -12,6 +12,96 @@
     @notifyCss
     <title>Hanover :: @yield('title')</title>
     {{-- @vite('resources/css/app.css') --}}
+
+    <style>
+
+        ul {
+        list-style-type: none;
+        }
+
+        body {
+        font-family: Verdana, sans-serif;
+        }
+
+        /* Month header */
+        .month {
+        padding: 70px 25px;
+        width: 100%;
+        background: #6566f1;
+        text-align: center;
+        }
+
+        /* Month list */
+        .month ul {
+        margin: 0;
+        padding: 0;
+        }
+
+        .month ul li {
+        color: white;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        }
+
+        /* Previous button inside month header */
+        .month .prev {
+        float: left;
+        padding-top: 10px;
+        }
+
+        /* Next button */
+        .month .next {
+        float: right;
+        padding-top: 10px;
+        }
+
+        /* Weekdays (Mon-Sun) */
+        .weekdays {
+        margin: 0;
+        padding: 10px 0;
+        background-color: #ddd;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        }
+
+        .weekdays li {
+        color: #666;
+        text-align: center;
+        }
+
+        /* Days (1-31) */
+        .days {
+        padding: 10px 0;
+        background: #ffff;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        }
+
+        .days li {
+        list-style-type: none;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        padding: 5px;
+        border-radius: 3px;
+        width: calc(100% / 7);
+        margin-bottom: 28px;
+        }
+
+        .days li.green {
+        background: #1abc9c;
+        color: white;
+        }
+
+        .days li.red {
+        background: #ff0000;
+        color: white;
+        }
+
+
+    </style>
 </head>
 
 <body class="bg-slate-100">

@@ -6,9 +6,11 @@ use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\DataUserController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Member\DataMemberController;
 use App\Http\Controllers\Member\PresentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,9 +99,12 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['member'])->group(function () {
         Route::prefix('member')->group(function () {
 
-            // Dashboard
+            // Present
             Route::get('/present', [PresentController::class, 'index']);
             Route::post('/present/store', [PresentController::class, 'store']);
+          
+            // Data Member
+            Route::get('/data', [DataMemberController::class, 'index']);
         });
     });
 });
