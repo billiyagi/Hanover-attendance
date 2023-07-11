@@ -28,7 +28,7 @@
                     <img src="https://avatars.githubusercontent.com/u/89958256?v=4" />
                 </div>
             </div>
-            <div class="text-xs mt-[2px]">Account</div>
+            <div class="text-xs mt-[2px]">Akun</div>
         </a>
     </li>
 </ul>

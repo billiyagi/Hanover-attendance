@@ -6,9 +6,8 @@ use App\Http\Controllers\Admin\DataController;
 use App\Http\Controllers\Admin\DataUserController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use App\Http\Controllers\Member\PresentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +78,17 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/data/{id}/delete', [DataController::class, 'destroy']);
             Route::get('/data/{id}/edit', [DataController::class, 'edit']);
             Route::put('/data/{id}/update', [DataController::class, 'update']);
+
+
+            // Users
+            Route::group(['prefix' => 'users'], function () {
+                Route::post(
+                    '/import',
+                    [UserController::class, 'importExcel']
+                )->name('users.import');
+                Route::get('/export/{type}', [UserController::class, 'export'])->name('users.export');
+            });
+            Route::resource('users', UserController::class);
         });
     });
 

@@ -7,7 +7,8 @@
         <div class="text-xl font-semibold flex justify-between items-center">
             <form action="/admin/attendance" class="form-control w-1/2">
                 <div class="input-group">
-                    <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search" />
+                    <input type="text" placeholder="Search…" class="input input-bordered input-sm" name="search"
+                        value="{{ !empty(request('search')) ? request('search') : '' }}" />
                     <button class="btn btn-square btn-primary btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -18,9 +19,6 @@
                 </div>
             </form>
             <div>
-                <button class="btn btn-info text-white me-3 btn-sm normal-case"><i
-                        class="fa-solid fa-file-import"></i>Import
-                </button>
                 <div class="join me-3">
                     <a href="{{ url('/admin/attendance/export/excel') }}"
                         class="btn px-6 btn-sm normal-case btn-success join-item text-white">
@@ -53,9 +51,15 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @php
                             $number = 1;
                         @endphp
+                        @empty($attendances->all())
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-lg">Tidak ada data</td>
+                            </tr>
+                        @endempty
                         @foreach ($attendances as $attendance)
                             <tr>
                                 <td>{{ $number }}</td>
