@@ -99,10 +99,10 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['member'])->group(function () {
         Route::prefix('member')->group(function () {
 
-            // Dashboard
+            // Present
             Route::get('/present', [PresentController::class, 'index']);
-
-
+            Route::post('/present/store', [PresentController::class, 'store']);
+          
             // Data Member
             Route::get('/data', [DataMemberController::class, 'index']);
         });
