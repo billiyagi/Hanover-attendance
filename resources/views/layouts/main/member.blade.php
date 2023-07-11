@@ -22,7 +22,7 @@
 
             <!-- needed to by the camera stream -->
             <div id="frame"
-                class="md:rounded-2xl overflow-hidden w-full md:w-[647px] bg-white relative h-full md:h-auto">
+                class="rounded-2xl overflow-hidden w-full md:w-[647px] bg-white relative h-full md:h-auto">
 
                 @yield('content')
             </div>
