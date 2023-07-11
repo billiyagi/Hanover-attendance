@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/present', [PresentController::class, 'index']);
+            Route::post('/present/store', [PresentController::class, 'store']);
         });
     });
 });
