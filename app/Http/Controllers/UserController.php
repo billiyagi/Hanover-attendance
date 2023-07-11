@@ -70,10 +70,9 @@ class UserController extends Controller
             'username' => $request->username,
             'nip' => $request->nip,
             'email' => $request->email,
-            'role' => $request->role_id == '1' ? 'admin' : 'member',
             'password' => bcrypt($request->password),
             'avatar' => $path,
-            'role_id' => $request->role_id
+            'role_id' => $request->role_id == '1' ? 1 : 2,
         ]);
 
         notify()->success('User berhasil disimpan!');
@@ -126,16 +125,13 @@ class UserController extends Controller
                 'username' => $request->username,
                 'nip' => $request->nip,
                 'email' => $request->email,
-                'role' => $request->role_id == '1' ? 'admin' : 'member',
                 'avatar' => $path,
-                'role_id' => $request->role_id
+                'role_id' => $request->role_id == '1' ? 1 : 2,
             ]);
 
             DB::commit();
         } catch (Exception $e) {
-            DB::rollback();
-
-            abort(500);
+           
         }
 
         notify()->success('User berhasil disimpan!');

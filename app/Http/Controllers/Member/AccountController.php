@@ -57,11 +57,11 @@ class AccountController extends Controller
                 'avatar' => $path
             ]);
 
-            DB::commit();
+          
         } catch (Exception $e) {
 
 
-            abort(500);
+        
         }
 
         notify()->success('Profil berhasil disimpan!');
