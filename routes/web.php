@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\AttendanceController;
-use App\Http\Controllers\Admin\DataController;
-use App\Http\Controllers\Admin\DataUserController;
-use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Member\PresentController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\DataController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\DataUserController;
+
+use App\Http\Controllers\Member\PresentController;
+use App\Http\Controllers\Member\AccountController;
+use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +101,10 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/present', [PresentController::class, 'index']);
+
+            // account
+            Route::get('/account', [AccountController::class, 'index'])->name('member.account.index');
+            Route::put('/account', [AccountController::class, 'update'])->name('member.account.update');
         });
     });
 });
