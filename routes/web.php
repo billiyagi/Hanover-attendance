@@ -9,6 +9,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Member\PresentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Member\PermitController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +102,17 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/present', [PresentController::class, 'index']);
+
+            //Permit
+            Route::get('/permit', [PermitController::class, 'index']);
+            Route::get('/permit/sakit', [PermitController::class, 'sakit']);
+            Route::get('/permit/cuti', [PermitController::class, 'cuti']);
+            Route::get('/permit/other', [PermitController::class, 'other']);
+            Route::post('/permit/sakit/store', [PermitController::class, 'storeSakit']);
+            Route::post('/permit/cuti/store', [PermitController::class, 'storeCuti']);
+            Route::post('/permit/other/store', [PermitController::class, 'storeOther']);
+
+        
         });
     });
 });
