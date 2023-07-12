@@ -66,7 +66,7 @@
             <div class="overflow-x-auto w-full">
                 <table class="table w-full">
                     <thead>
-                        <tr class="bg-base-200">
+                        <tr class="bg-base btn-primary -200">
                             <th>Nama</th>
                             <th>Email</th>
                             <th>NIP</th>
