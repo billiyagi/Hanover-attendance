@@ -27,6 +27,7 @@
             </div>
         </label>
         <ul tabindex="0" class="dropdown-content z-[1] menu ms-2 p-2 shadow rounded-box w-52 bg-white">
+            <li><a href="{{ url('/member/permit') }}">Keterangan Izin</a></li>
             <li><a href="{{ url('/member/permit/sakit') }}">Sakit</a></li>
             <li><a href="{{ url('/member/permit/cuti') }}">Cuti</a></li>
             <li><a href="{{ url('/member/permit/other') }}">Lainnya</a></li>

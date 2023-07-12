@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('permit', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
+            $table->longText('description');
             $table->string('permit_image')->nullable();
             $table->enum('type', ['sakit', 'cuti', 'other'])->default('cuti');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 use App\Http\Controllers\Member\DataMemberController;
 use App\Http\Controllers\Member\PresentController;
+use App\Http\Controllers\Member\PermitController;
 use App\Http\Controllers\Member\AccountController;
 
 
@@ -105,6 +106,15 @@ Route::middleware(['auth'])->group(function () {
             // Present
             Route::get('/present', [PresentController::class, 'index']);
             Route::post('/present/store', [PresentController::class, 'store']);
+
+            //Permit
+            Route::get('/permit', [PermitController::class, 'index']);
+            Route::get('/permit/sakit', [PermitController::class, 'sakit']);
+            Route::get('/permit/cuti', [PermitController::class, 'cuti']);
+            Route::get('/permit/other', [PermitController::class, 'other']);
+            Route::post('/permit/sakit/store', [PermitController::class, 'storeSakit']);
+            Route::post('/permit/cuti/store', [PermitController::class, 'storeCuti']);
+            Route::post('/permit/other/store', [PermitController::class, 'storeOther']);            
             
             // Data Member
             Route::get('/data', [DataMemberController::class, 'index']);
