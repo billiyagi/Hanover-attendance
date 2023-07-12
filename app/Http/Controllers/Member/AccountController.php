@@ -57,7 +57,7 @@ class AccountController extends Controller
                 'avatar' => $path
             ]);
 
-          
+            DB::commit();
         } catch (Exception $e) {
 
 
