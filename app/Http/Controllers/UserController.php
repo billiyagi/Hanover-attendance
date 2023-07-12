@@ -70,10 +70,9 @@ class UserController extends Controller
             'username' => $request->username,
             'nip' => $request->nip,
             'email' => $request->email,
-            'role' => $request->role_id == '1' ? 'admin' : 'member',
             'password' => bcrypt($request->password),
             'avatar' => $path,
-            'role_id' => $request->role_id
+            'role_id' => $request->role_id == '1' ? 1 : 2,
         ]);
 
         notify()->success('User berhasil disimpan!');
@@ -90,22 +89,19 @@ class UserController extends Controller
 
     public function update(UserRequest $request, User $user)
     {
-        DB::beginTransaction();
-
         $path = $user->avatar;
-
-        if($request->avatar) {
-            if($path != "default.png") {
+    
+        if ($request->avatar) {
+            if ($path != "default.png") {
                 // delete old avatar
                 $old_path = explode("/", $path)[6];
                 $old_path = public_path('storage/img/avatar/'.$old_path);
-
-                if(file_exists($old_path)) {
+    
+                if (file_exists($old_path)) {
                     unlink($old_path);
                 }
             }
-
-            // update new avatar
+    
             $avatar = $request->avatar;
             $avatar_name = uniqid().'.'.$avatar->getClientOriginalExtension();
     
@@ -113,33 +109,28 @@ class UserController extends Controller
     
             $path = Storage::disk('public')->url('img/avatar/'.$avatar_name);
         }
-
+    
         try {
-            if($request->password) {
-                $user->update([
-                    'password' => bcrypt($request->password)
-                ]);
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->nip = $request->nip;
+            $user->email = $request->email;
+            $user->avatar = $path;
+            $user->role_id = $request->role_id == '1' ? 1 : 2;
+    
+            if ($request->password) {
+                $user->password = bcrypt($request->password);
             }
-
-            $user->update([
-                'name' => $request->name,
-                'username' => $request->username,
-                'nip' => $request->nip,
-                'email' => $request->email,
-                'role' => $request->role_id == '1' ? 'admin' : 'member',
-                'avatar' => $path,
-                'role_id' => $request->role_id
-            ]);
-
-            DB::commit();
+    
+            $user->save();
         } catch (Exception $e) {
-            DB::rollback();
-
-            abort(500);
+    
+            notify()->error('Terjadi kesalahan saat menyimpan pengguna.');
+            return redirect()->back();
         }
-
+    
         notify()->success('User berhasil disimpan!');
-
+    
         return redirect()->route('users.index');
     }
 

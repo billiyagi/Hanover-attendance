@@ -17,55 +17,49 @@ class AccountController extends Controller
 
     public function update(Request $request)
     {
-        DB::beginTransaction();
-
         $path = auth()->user()->avatar;
-
-        if($request->avatar) {
-            if($path != "default.png") {
+    
+        if ($request->avatar) {
+            if ($path != "default.png") {
                 // delete old avatar
                 $old_path = explode("/", $path)[6];
-                $old_path = public_path('storage/img/avatar/'.$old_path);
-
-                if(file_exists($old_path)) {
+                $old_path = public_path('storage/img/avatar/' . $old_path);
+    
+                if (file_exists($old_path)) {
                     unlink($old_path);
                 }
             }
-
-            // update new avatar
+    
             $avatar = $request->avatar;
-            $avatar_name = uniqid().'.'.$avatar->getClientOriginalExtension();
+            $avatar_name = uniqid() . '.' . $avatar->getClientOriginalExtension();
     
             Storage::disk('public')->putFileAs('img/avatar', $avatar, $avatar_name);
     
-            $path = Storage::disk('public')->url('img/avatar/'.$avatar_name);
+            $path = Storage::disk('public')->url('img/avatar/' . $avatar_name);
         }
-
+    
         try {
-            $user = User::findOrFail(auth()->user()->id);
-
-            if($request->password) {
-                $user->update([
-                    'password' => bcrypt($request->password)
-                ]);
-            }
-
-            $user->update([
-                'name' => $request->name,
-                'nip' => $request->nip,
-                'email' => $request->email,
-                'avatar' => $path
-            ]);
-
-            DB::commit();
+            DB::transaction(function () use ($request, $path) {
+                $user = User::findOrFail(auth()->user()->id);
+    
+                if ($request->password) {
+                    $user->password = bcrypt($request->password);
+                }
+    
+                $user->name = $request->name;
+                $user->nip = $request->nip;
+                $user->email = $request->email;
+                $user->avatar = $path;
+    
+                $user->save();
+            });
+    
+            notify()->success('Profil berhasil disimpan!');
         } catch (Exception $e) {
-
-
-            abort(500);
+    
+            notify()->error('Terjadi kesalahan saat menyimpan profil.');
         }
-
-        notify()->success('Profil berhasil disimpan!');
-
+    
         return redirect()->route('member.account.index');
     }
 }
