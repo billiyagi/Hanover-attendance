@@ -19,7 +19,7 @@ class AccountController extends Controller
     {
         $path = auth()->user()->avatar;
     
-        if ($request->avatar) {
+        if ($request->hasFile('avatar')) {
             if ($path != "default.png") {
                 // delete old avatar
                 $old_path = explode("/", $path)[6];
@@ -30,12 +30,12 @@ class AccountController extends Controller
                 }
             }
     
-            $avatar = $request->avatar;
+            $avatar = $request->file('avatar');
             $avatar_name = uniqid() . '.' . $avatar->getClientOriginalExtension();
     
-            Storage::disk('public')->putFileAs('img/avatar', $avatar, $avatar_name);
+            $avatar->storeAs('public/img/avatar', $avatar_name);
     
-            $path = Storage::disk('public')->url('img/avatar/' . $avatar_name);
+            $path = Storage::url('img/avatar/' . $avatar_name);
         }
     
         try {
