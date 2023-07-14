@@ -91,25 +91,24 @@ class UserController extends Controller
     {
         $path = $user->avatar;
     
-        if ($request->avatar) {
+        if ($request->hasFile('avatar')) {
             if ($path != "default.png") {
                 // delete old avatar
                 $old_path = explode("/", $path)[6];
-                $old_path = public_path('storage/img/avatar/'.$old_path);
+                $old_path = public_path('storage/img/avatar/' . $old_path);
     
                 if (file_exists($old_path)) {
                     unlink($old_path);
                 }
             }
     
-            $avatar = $request->avatar;
-            $avatar_name = uniqid().'.'.$avatar->getClientOriginalExtension();
+            $avatar = $request->file('avatar');
+            $avatar_name = uniqid() . '.' . $avatar->getClientOriginalExtension();
     
-            Storage::disk('public')->putFileAs('img/avatar', $avatar, $avatar_name);
+            $avatar->storeAs('public/img/avatar', $avatar_name);
     
-            $path = Storage::disk('public')->url('img/avatar/'.$avatar_name);
+            $path = Storage::url('img/avatar/' . $avatar_name);
         }
-    
         try {
             $user->name = $request->name;
             $user->username = $request->username;
