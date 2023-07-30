@@ -39,6 +39,7 @@ class DataController extends Controller
         return view('admin.data.index', compact('datas'));
     }
 
+    
         public function export($type = 'excel')
     {
         // Generate File Excel & Pdf
