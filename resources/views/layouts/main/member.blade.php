@@ -84,11 +84,13 @@
         text-align: center;
         font-size: 12px;
         color: #777;
-        padding: 5px;
+        padding: 6px;
         border-radius: 3px;
         width: calc(100% / 7);
         margin-bottom: 28px;
+        
         }
+
 
         .days li.green {
         background: #1abc9c;
@@ -97,6 +99,11 @@
 
         .days li.red {
         background: #ff0000;
+        color: white;
+        }
+
+        .days li.blue {
+        background: #3498db;
         color: white;
         }
 

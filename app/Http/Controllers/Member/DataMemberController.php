@@ -16,7 +16,7 @@ class DataMemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, AttendanceUser $attendanceUser)
+    public function index(Request $request, AttendanceUser $attendanceUser, Permit $permit)
     {
 
          // Mendapatkan input bulan dan tahun dari query string
@@ -33,6 +33,10 @@ class DataMemberController extends Controller
         $nextYear = date('Y', strtotime($currentYear . '-' . $currentMonth . ' +1 month'));
 
         $attendanceData = DB::table('attendance_user')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+        $permitData = DB::table('permit')
             ->where('user_id', Auth::user()->id)
             ->get();
 
@@ -53,34 +57,51 @@ class DataMemberController extends Controller
             // $dayClass = $hasAttendance ? 'active' : '';
 
             // Konversi timestamp created_at
-            $dataToConvert = DB::table('attendance_user')
+            $dataAttendanceToConvert = DB::table('attendance_user')
                 ->where('user_id', Auth::user()->id)
                 ->where('created_at', 'like', $currentYear. '-' . $currentMonth . '-'. $day . '%')
                 ->first();
 
 
-            if(!empty($dataToConvert)) {
-                $dateConversion = Carbon::parse($dataToConvert->created_at)->format('d');
+            if(!empty($dataAttendanceToConvert)) {
+                $dateConversionAttendanceData = Carbon::parse($dataAttendanceToConvert->created_at)->format('d');
             } else {
-                $dateConversion = $day;
+                $dateConversionAttendanceData = $day;
+            }
+
+            $dataPermitToConvert = DB::table('permit')
+                ->where('user_id', Auth::user()->id)
+                ->where('created_at', 'like', $currentYear. '-' . $currentMonth . '-'. $day . '%')
+                ->first();
+
+
+            if(!empty($dataPermitToConvert)) {
+                $dateConversionPermitData = Carbon::parse($dataPermitToConvert->created_at)->format('d');
+            } else {
+                $dateConversionPermitData = $day;
             }
 
 
-            // Periksa apakah tanggal $day sama dengan $dateConversion
-            if($day == $dateConversion) {
+            // Periksa apakah tanggal $day sama dengan $dateConversionAttendanceData
+            if($day == $dateConversionAttendanceData && $day == $dateConversionPermitData) {
                 $attendanceData = DB::table('attendance_user')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('created_at', 'like', $currentYear. '-' . $currentMonth . '-' . $day . '%')->first();
+
+                $permitData = DB::table('permit')
                     ->where('user_id', Auth::user()->id)
                     ->where('created_at', 'like', $currentYear. '-' . $currentMonth . '-' . $day . '%')->first();
             } else {
                 $attendanceData = [];
+                $permitData = [];
             }
+
             $dayData = [
                 'day' => $day,
                 // 'class' => $dayClass,
                 'attendanceData' => $attendanceData,
-
+                'permitData' => $permitData
             ];
-
 
             $days[] = $dayData;
         }
