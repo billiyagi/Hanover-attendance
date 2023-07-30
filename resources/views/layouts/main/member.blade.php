@@ -100,6 +100,41 @@
         color: white;
         }
 
+        .month {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #6566f1;
+        color: white;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        }
+
+        /* CSS untuk tombol 'previous' dan 'next' */
+        .month .prev,
+        .month .next {
+        text-decoration: none;
+        color: white;
+        padding: 25px;
+        }
+
+        /* CSS untuk elemen bulan dan tahun */
+        .month span {
+        font-size: 20px;
+        }
+
+        /* CSS untuk mengatur tata letak tombol 'previous' dan 'next' */
+        .month ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        /* CSS tambahan untuk elemen bulan dan tahun pada tombol 'previous' dan 'next' */
+        .month ul li span {
+        margin: 0 10px;
+        }
 
     </style>
 </head>
