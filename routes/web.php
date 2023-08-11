@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Admin\DataController;
@@ -45,11 +45,11 @@ Route::middleware(['auth'])->group(function () {
 
             // Dashboard
             Route::get('/dashboard', [AdminDashboardController::class, 'index']);
-
+            // settings
+            Route::get('/settings', [AdminDashboardController::class, 'settings']);
 
             // Attendance
             Route::get('/attendance', [AttendanceController::class, 'index']);
-            // Route::get('/attendance/search', [AttendanceController::class, 'index']);
             Route::get('/attendance/create', [AttendanceController::class, 'create']);
             Route::post('/attendance/store', [AttendanceController::class, 'store']);
             Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit']);
@@ -88,14 +88,22 @@ Route::middleware(['auth'])->group(function () {
 
 
             // Users
-            Route::group(['prefix' => 'users'], function () {
-                Route::post(
-                    '/import',
-                    [UserController::class, 'importExcel']
-                )->name('users.import');
-                Route::get('/export/{type}', [UserController::class, 'export'])->name('users.export');
-            });
-            Route::resource('users', UserController::class);
+            // Route::group(['prefix' => 'users'], function () {
+            //     Route::post(
+            //         '/import',
+            //         [UserController::class, 'importExcel']
+            //     )->name('users.import');
+            //     Route::get('/export/{type}', [UserController::class, 'export'])->name('users.export');
+            // });
+            // Route::resource('users', UserController::class);
+
+            Route::get('/users', [UserController::class, 'index']);
+            Route::get('/users/{nip}', [UserController::class, 'show']);
+            Route::get('/users/{nip}/edit', [UserController::class, 'edit']);
+            Route::put('/users/{nip}/update', [UserController::class, 'update']);
+            Route::get('/users/create', [UserController::class, 'create']);
+            Route::post('/users/store', [UserController::class, 'store']);
+            Route::delete('/users/{id}/delete', [UserController::class, 'destroy']);
         });
     });
 
@@ -115,11 +123,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/permit/other', [PermitController::class, 'other']);
             Route::post('/permit/sakit/store', [PermitController::class, 'storeSakit']);
             Route::post('/permit/cuti/store', [PermitController::class, 'storeCuti']);
-            Route::post('/permit/other/store', [PermitController::class, 'storeOther']);            
-            
+            Route::post('/permit/other/store', [PermitController::class, 'storeOther']);
+
             // Data Member
             Route::get('/data', [DataMemberController::class, 'index']);
-            
+
             // account
             Route::get('/account', [AccountController::class, 'index'])->name('member.account.index');
             Route::put('/account', [AccountController::class, 'update'])->name('member.account.update');

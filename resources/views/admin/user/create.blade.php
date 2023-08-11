@@ -3,75 +3,133 @@
 @section('title', 'Buat Pengguna')
 
 @section('content')
-    <div class="card w-full p-6 bg-base-300 mt-2">
-        <div class="text-xl font-semibold ">Tambah User</div>
-        <div class="divider mt-2"></div>
-        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="h-full w-full pb-6 bg-base-300">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="form-control w-full undefined">
+    <form action="/admin/users/store" enctype="multipart/form-data" method="post">
+        @csrf
+        <div class="flex flex-row">
+
+            {{-- Foto Profil Pengguna --}}
+            <div class="card bg-base-300 basis-auto me-10 p-6 h-full w-[500px]">
+                <div class="text-xl font-semibold ">Foto</div>
+                <div class="divider mt-2"></div>
+                <div class="card-body p-0">
+                    <img src="{{ asset('assets/img/default.png') }}" alt="Foto Image" id="thumbnail">
+                    <input type="file" name="foto" class="file-input file-input-bordered w-full mt-5 file-thumbnail"
+                        onchange="previewImg()" />
+                </div>
+                @error('foto')
+                    <label class="label">
+                        <span class="label-text-alt text-red-600">{{ $message }}</span>
+                    </label>
+                @enderror
+            </div>
+
+            {{-- Detail Pengguna --}}
+            <div class="card bg-base-300 basis-11/12 p-6">
+                <div class="text-xl font-semibold ">
+                    <a href="{{ url('/admin/users') }}" class="btn btn-accent mr-5 btn-sm">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    Detail Pengguna
+                </div>
+                <div class="divider mt-2"></div>
+                <div class="card-body p-0">
+
+                    {{-- Nama Lengkap --}}
+                    <div class="form-control">
                         <label class="label">
-                            <span class="label-text text-base-content undefined">Nama Lengkap</span>
+                            <span class="label-text text-lg">Nama Lengkap</span>
                         </label>
-                        <input type="text" name="name" placeholder="" class="input  input-bordered w-full "
-                            value="{{ old('name') }}" required>
-                    </div>
-                    <div class="form-control w-full undefined"><label class="label"><span
-                                class="label-text text-base-content undefined">Avatar</span></label><input type="file"
-                            placeholder="" class="input-bordered w-full " name="avatar">
-                        <label class="label">
-                            <span class="label-text-alt">Format: JPG,JPEG,PNG | Maks: 2Mb</span>
-                            @error('avatar')
+                        <input type="text" name="name" class="input input-bordered w-full"
+                            value="{{ old('name') }}" />
+                        @error('name')
+                            <label class="label">
                                 <span class="label-text-alt text-red-600">{{ $message }}</span>
-                            @enderror
-                        </label>
+                            </label>
+                        @enderror
                     </div>
-                    <div class="form-control w-full undefined"><label class="label"><span
-                                class="label-text text-base-content undefined">Email</span></label><input name="email"
-                            type="email" placeholder="" class="input  input-bordered w-full " value="{{ old('email') }}"
-                            required></div>
-                    <div class="form-control w-full undefined"><label class="label"><span
-                                class="label-text text-base-content undefined">Username</span></label><input name="username"
-                            type="text" placeholder="" class="input  input-bordered w-full "
-                            value="{{ old('username') }}" required>
+
+                    {{-- Username --}}
+                    <div class="form-control">
                         <label class="label">
-                            @error('username')
-                                <span class="label-text-alt text-red-600">{{ $message }}</span>
-                            @enderror
+                            <span class="label-text text-lg">Username</span>
                         </label>
+                        <input type="text" name="username" class="input input-bordered w-full"
+                            value="{{ old('username') }}" />
+                        @error('username')
+                            <label class="label">
+                                <span class="label-text-alt text-red-600">{{ $message }}</span>
+                            </label>
+                        @enderror
                     </div>
-                    <div class="form-control w-full undefined"><label class="label"><span
-                                class="label-text text-base-content undefined">Password</span></label><input name="password"
-                            type="password" placeholder="" class="input  input-bordered w-full " required>
+
+                    {{-- Email --}}
+                    <div class="form-control">
                         <label class="label">
-                            @error('password')
-                                <span class="label-text-alt text-red-600">{{ $message }}</span>
-                            @enderror
+                            <span class="label-text text-lg">Email</span>
                         </label>
+                        <input type="email" name="email" class="input input-bordered w-full"
+                            value="{{ old('email') }}" />
+                        @error('email')
+                            <label class="label">
+                                <span class="label-text-alt text-red-600">{{ $message }}</span>
+                            </label>
+                        @enderror
                     </div>
-                    <div class="form-control w-full undefined"><label class="label"><span
-                                class="label-text text-base-content undefined">NIP</span></label><input
-                            value="{{ old('nip') }}" name="nip" type="number" placeholder=""
-                            class="input  input-bordered w-full " required></div>
-                    <div class="form-control w-full undefined"><label class="label"><span
-                                class="label-text text-base-content undefined">Hak Akses</span></label>
-                        <select name="role_id" class="input input-bordered w-full">
-                            @foreach ($roles as $role)
-                                <option {{ old('role_id') == $role->id ? 'selected' : '' }} value="{{ $role->id }}">
-                                    {{ $role->name }}</option>
-                            @endforeach
+
+                    {{-- Password --}}
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-lg">Password</span>
+                        </label>
+                        <input type="password" name="password" class="input input-bordered w-full"
+                            value="{{ old('password') }}" />
+                        @error('password')
+                            <label class="label">
+                                <span class="label-text-alt text-red-600">{{ $message }}</span>
+                            </label>
+                        @enderror
+                    </div>
+
+                    {{-- Peran --}}
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-lg">Hak Akses</span>
+                        </label>
+                        <select class="select select-bordered w-full" name="role">
+                            <option disabled selected>-- Pilih Peran Pengguna --</option>
+                            <option value="1">Administrator</option>
+                            <option value="2">Member</option>
                         </select>
+                        @error('role')
+                            <label class="label">
+                                <span class="label-text-alt text-red-600">{{ $message }}</span>
+                            </label>
+                        @enderror
+                    </div>
+
+                    <div class="flex justify-end mt-10">
+                        <button class="btn btn-primary w-40">Buat Pengguna</button>
                     </div>
                 </div>
-                <div class="mt-16"><button class="btn btn-primary float-right">Simpan</button></div>
             </div>
-        </form>
-    </div>
+        </div>
+
+    </form>
 
 
 @endsection
 
 @section('script')
+    <script>
+        function previewImg() {
+            const thumbnail = document.querySelector('#thumbnail');
+            const inputFile = document.querySelector('.file-thumbnail');
 
+            const fileThumbnail = new FileReader();
+            fileThumbnail.readAsDataURL(inputFile.files[0]);
+            fileThumbnail.onload = function(e) {
+                thumbnail.src = e.target.result;
+            }
+        }
+    </script>
 @endsection

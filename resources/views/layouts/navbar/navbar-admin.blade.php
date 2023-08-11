@@ -36,7 +36,8 @@
         <div class="dropdown dropdown-bottom dropdown-end">
             <label tabindex="0" class="avatar online">
                 <div class="w-12 h-12 rounded-full">
-                    <img src="https://avatars.githubusercontent.com/u/89958256?v=4" />
+                    <img
+                        src="{{ Auth::user()->avatar == 'default.png' ? url('/assets/img/default.png') : asset('/storage/img/avatar/' . Auth::user()->avatar) }}" />
                 </div>
             </label>
             <div tabindex="0"

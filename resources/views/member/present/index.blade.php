@@ -4,7 +4,7 @@
 
 @section('content')
 
-    @if ($attendance['status'] == 'open')
+    @if ($attendance['status'] == 'open' || $attendance['status'] == 'not')
         {{-- Camera --}}
         <form action="/member/present/store" method="post" enctype="multipart/form-data">
             @csrf
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </form>
-    @else
+    @elseif ($attendance['status'] == 'close')
         <div class="flex items-center justify-center h-full w-full p-5 overflow-auto">
             <div class="text-center">
                 <p class="text-lg mb-3">Kamu telah melakukan absen, tunggu waktu absen keluar</p>
@@ -36,7 +36,7 @@
 @endsection
 
 @section('script')
-    @if ($attendance['status'] == 'open')
+    @if ($attendance['status'] == 'open' || $attendance['status'] == 'not')
         <script src="{{ asset('assets/plugin/jslib-html5-camera-photo/jslib-html5-camera-photo.min.js') }}"></script>
 
         <script>

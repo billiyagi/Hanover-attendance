@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\Present;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,11 +54,17 @@ class LoginController extends Controller
         /**
          * Check User Credentials
          */
-        if (Auth::attempt($credentials)) {
+        if(Auth::attemptWhen($credentials, function ($user) {
+            return Present::getAttendanceId($user->id) != false || $user->role_id == 1;
+        })) {
             $request->session()->regenerate();
             notify()->success('Welcome Back!', 'Login Success');
             return redirect()->intended($this->redirectToRoute);
-        }
+        } else {
+            return back()->withErrors([
+                'nip' => 'Anda belum terdaftar pada sistem absensi.',
+            ])->onlyInput('nip');
+        };
 
         /**
          * If user credentials not match

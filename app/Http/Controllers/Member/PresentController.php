@@ -19,12 +19,16 @@ class PresentController extends Controller
         // Get attendance status
         $attendance = Present::getAttendanceStatus(Auth::user(), Present::getAttendanceId(Auth::user()->id)->id);
 
-        // Check if clock now is between time start and time start gap
-        if ($clockNow >= $attendance['attendance']->time_end_deadline && $clockNow <= $attendance['attendance']->time_end_gap_deadline) {
-            $attendance['status'] = 'open';
-        } else {
-            $attendance['status'] = 'close';
+        if ($attendance['status'] != 'not') {
+            // Check if clock now is between time start and time start gap
+            if ($clockNow >= $attendance['attendance']->time_end_deadline && $clockNow <= $attendance['attendance']->time_end_gap_deadline) {
+                $attendance['status'] = 'open';
+            } else {
+                $attendance['status'] = 'close';
+            }
         }
+
+
 
         return view('member.present.index', compact('attendance'));
     }

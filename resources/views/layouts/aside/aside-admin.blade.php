@@ -68,7 +68,7 @@
             </details>
         </li>
         <li class="mb-3">
-            <a href="{{ route('users.index') }}"
+            <a href="{{ url('/admin/users') }}"
                 {{ url('/admin/users') == url()->current() ? 'class=bg-base-100' : '' }}>
                 <i class="fa-solid fa-users-gear"></i>
                 Pengguna

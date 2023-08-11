@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -21,27 +22,13 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = isset($this->user) ? $this->user->id : '';
-        $password_validate = $id == '' ? 'min:8' : 'sometimes';
-
         return [
-            'avatar' => 'mimes:jpg,jpeg,png|max:2048',
-            'username' => 'min:5|unique:users,username,'.$id,
-            'password' => $password_validate,
-            'nip' => 'max:10|unique:users,nip,'.$id
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'avatar.mimes' => 'Format foto salah',
-            'avatar.max' => 'Ukuran foto terlalu besar',
-            'username.min' => 'Username minimal :min karakter',
-            'username.unique' => 'Username sudah digunakan',
-            'password.min' => 'Password minimal :min karakter',
-            'nip.unique' => 'NIP sudah digunakan',
-            'nip.max' => 'NIP maksimal 10 karakter'
+            'name'          =>  'required|string',
+            // 'username'      =>  'required|string|unique:users|min:5',
+            // 'email'         =>  'required|email|unique:users',
+            // 'password'      =>  'required|string|min:8',
+            // 'foto'          =>  'required|mimes:jpg,jpeg,png|max:1048',
+            'role'          =>  'required|in:1,2',
         ];
     }
 }
